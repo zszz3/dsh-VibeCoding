@@ -1,10 +1,12 @@
 # dsh-VibeCoding
 
-[DeepSeek Harness](https://github.com/deepseek-ai/deepseek-harness) 用来跟 AI 协同开发的那套文件,加一篇说明怎么用它们的文章。
+这个仓库收了两样东西:[DeepSeek Harness](https://github.com/deepseek-ai/deepseek-harness)(下面简称 dsh)跟 AI 协同开发用的那套文件,和一篇讲这些文件怎么用的文章——文章就是下面的正文。
 
-文件是 dsh 的原件,放在原本的路径上,内容没改,只修了跨仓库的链接。文章就是这篇 README。
+那套文件具体指:给 AI 每次开工前读的规则(`AGENTS.md`,分六层)、决策记录制度和 132 篇真实记录、11 个把工作流固化下来的 skill,以及测试策略、缺陷模式、贡献流程三份规范。清单见[最后一节](#仓库内容)。
 
-需要注意:这些文件里的命令、目录、技术选择说的是 dsh 那个仓库,不是这里。抄走的时候要换成自己项目的事实。
+dsh 是 DeepSeek 开源的 agent harness,它也用 AI 开发自己:仓库里 `codex/`、`worktree/`、`agent/` 开头的分支是不同 AI agent 提的。所以这套文件是实际在用的东西,不是为了演示写出来的。
+
+有一点读之前要知道:这些文件是 dsh 的原件,里面的命令(`pnpm run test`)、目录(`packages/`)、技术选择(Cordis、ESM)说的都是 dsh 那个仓库,在这里不成立。把它们当参考实现看,抄到自己项目时换成自己的事实,顺序见[第七节](#七怎么开始)。
 
 ---
 
