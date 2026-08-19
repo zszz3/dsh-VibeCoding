@@ -11,8 +11,8 @@ Repository translations follow the sibling pairing contract: English `foo.md`, C
 
 ## Read the owning contracts
 
-- Read [docs/AGENTS.md](../../docs/doc-standards.md) and use [dsh-doc-standards](../../skills/dsh-doc-standards/SKILL.md) when deciding where content belongs or changing product documentation prose.
-- For an edited bilingual source, follow the lightweight routine path in [docs/AGENTS.md](../../docs/doc-standards.md#writing-rules) and the [pairing contract](https://github.com/deepseek-ai/deepseek-harness/blob/master/docs/i18n/README.md); never invoke the extended translation skill automatically.
+- Read [docs/AGENTS.md](../../../docs/doc-standards.md) and use [dsh-doc-standards](../dsh-doc-standards/SKILL.md) when deciding where content belongs or changing product documentation prose.
+- For an edited bilingual source, follow the lightweight routine path in [docs/AGENTS.md](../../../docs/doc-standards.md#writing-rules) and the [pairing contract](https://github.com/deepseek-ai/deepseek-harness/blob/master/docs/i18n/README.md); never invoke the extended translation skill automatically.
 - Read the current `DocsPage` type and entries in [website/docs.ts](https://github.com/deepseek-ai/deepseek-harness/blob/master/website/docs.ts) before changing the manifest; do not rely on a remembered field set.
 - Read [website/.vitepress/config.ts](https://github.com/deepseek-ai/deepseek-harness/blob/master/website/.vitepress/config.ts) before adding a new section, sidebar collection, locale, or top-level navigation item.
 
@@ -79,7 +79,7 @@ pnpm run lint
 git diff --check
 ```
 
-Use [dsh-pre-push-checks](../../skills/dsh-pre-push-checks/SKILL.md) before pushing. Report the canonical files changed, manifest entries added or removed, public routes affected, and the exact checks run.
+Use [dsh-pre-push-checks](../dsh-pre-push-checks/SKILL.md) before pushing. Report the canonical files changed, manifest entries added or removed, public routes affected, and the exact checks run.
 
 ## Keep deployment separate
 

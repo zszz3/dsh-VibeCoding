@@ -31,7 +31,7 @@
 
 **验收:** 随便挑一个上季度的设计选择,看能不能从记录里读出「当时否掉了什么、为什么」。
 
-**别做:** 别允许「我们决定用 X」这种只有结论的记录——那正是招致反复争论的写法。完整制度见 [agent-notes/README.md](../agent-notes/README.md)。
+**别做:** 别允许「我们决定用 X」这种只有结论的记录——那正是招致反复争论的写法。完整制度见 [agent-notes/README.md](../.agents/notes/README.md)。
 
 ## 第 3 步:焊两三道门禁
 
@@ -64,7 +64,7 @@
 
 一个好 skill = **一句可执行的判定 + 一张防过度的护栏**。护栏那半往往比判定更重要,它拦住的是「热心 AI 一删到底」。
 
-**从哪起步:** 审查、发布、清理这类高频活。可直接借用本库的 [skills/](../skills/README.md),按你们的门禁命令替换其中的项目专有部分。
+**从哪起步:** 审查、发布、清理这类高频活。可直接借用本库的 [skills/](../.agents/skills/README.md),按你们的门禁命令替换其中的项目专有部分。
 
 **产出:** 同类任务不再每次靠临场发挥,质量不飘。
 
@@ -74,7 +74,7 @@
 
 ## 第 6 步:多 AI 隔离并行 + 互审
 
-**做:** 每个 AI 一个 git worktree(分支带来源前缀);依赖链用官方 stacked PR([skills/dsh-merging-stacked-prs](../skills/dsh-merging-stacked-prs/SKILL.md));审查者 AI 加载 [skills/dsh-code-review](../skills/dsh-code-review/SKILL.md);合并前把对应决策记录从「提案」改写成「已落地」。
+**做:** 每个 AI 一个 git worktree(分支带来源前缀);依赖链用官方 stacked PR([skills/dsh-merging-stacked-prs](../.agents/skills/dsh-merging-stacked-prs/SKILL.md));审查者 AI 加载 [skills/dsh-code-review](../.agents/skills/dsh-code-review/SKILL.md);合并前把对应决策记录从「提案」改写成「已落地」。
 
 **产出:** 并行不打架,人只看被过滤后的关键决策。
 

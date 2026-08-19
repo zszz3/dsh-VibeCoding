@@ -14,7 +14,7 @@
 
 任一道红 → 打回重做。
 
-**关键纪律:pre-push 不跑全套。** 选恰好覆盖本次改动的最小集合,CI 才负责穷尽覆盖与平台矩阵。证据要对上改动面:行为改动 → 聚焦测试;用户/模型可见输出 → 快照;文档 → 文档门禁;发布路径 → 构建 + 产物冒烟。参考 [skills/dsh-pre-push-checks](../skills/dsh-pre-push-checks/SKILL.md)。
+**关键纪律:pre-push 不跑全套。** 选恰好覆盖本次改动的最小集合,CI 才负责穷尽覆盖与平台矩阵。证据要对上改动面:行为改动 → 聚焦测试;用户/模型可见输出 → 快照;文档 → 文档门禁;发布路径 → 构建 + 产物冒烟。参考 [skills/dsh-pre-push-checks](../.agents/skills/dsh-pre-push-checks/SKILL.md)。
 
 ## 值得抄的门禁清单
 

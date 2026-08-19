@@ -1,10 +1,10 @@
 # AGENTS.md — The documentation standard
 
-This file defines document structure, Markdown tiers, writing rules, and `verify-doc-budgets` ceilings. Use [dsh-doc-standards](../skills/dsh-doc-standards/SKILL.md) for placement and validation, and [dsh-prose-standard](../skills/dsh-prose-standard/SKILL.md) for required coverage and editorial judgment; the [doc-tiers Agent Note](https://github.com/deepseek-ai/deepseek-harness/blob/master/.agents/notes/implemented/process/2026-07-04-doc-tiers-and-budgets.md) owns rationale.
+This file defines document structure, Markdown tiers, writing rules, and `verify-doc-budgets` ceilings. Use [dsh-doc-standards](../.agents/skills/dsh-doc-standards/SKILL.md) for placement and validation, and [dsh-prose-standard](../.agents/skills/dsh-prose-standard/SKILL.md) for required coverage and editorial judgment; the [doc-tiers Agent Note](https://github.com/deepseek-ai/deepseek-harness/blob/master/.agents/notes/implemented/process/2026-07-04-doc-tiers-and-budgets.md) owns rationale.
 
 ## Document structure
 
-These rules apply to human-facing documentation; [Agent Notes](../agent-notes/README.md) remain outside their scope. A [postmortem](https://github.com/deepseek-ai/deepseek-harness/blob/master/docs/postmortem/README.md) is an incident-scoped reference; chronology records evidence, not a teaching sequence. A document's subject and tree position fix its scope: describe its own subject at appropriate detail and direct children only by purpose, responsibility, and high-level behavior; link to the owning descendant for lower-level detail. Document type does not widen that scope. A reference may be exhaustive only about its own subject. Testing mechanisms, fixtures, and harnesses belong at the lowest owning level; higher documents link there.
+These rules apply to human-facing documentation; [Agent Notes](../.agents/notes/README.md) remain outside their scope. A [postmortem](https://github.com/deepseek-ai/deepseek-harness/blob/master/docs/postmortem/README.md) is an incident-scoped reference; chronology records evidence, not a teaching sequence. A document's subject and tree position fix its scope: describe its own subject at appropriate detail and direct children only by purpose, responsibility, and high-level behavior; link to the owning descendant for lower-level detail. Document type does not widen that scope. A reference may be exhaustive only about its own subject. Testing mechanisms, fixtures, and harnesses belong at the lowest owning level; higher documents link there.
 
 Classify every in-scope document as a tutorial or reference. Tutorials follow an ordered path to an outcome and introduce only what each step needs. References define a lookup scope and current behavior without a teaching sequence. Separate substantial tutorial and reference content; label a section when either part is small.
 
@@ -22,7 +22,7 @@ Each fact has one home: the tier whose job it is; elsewhere, link there.
 | Subtree `AGENTS.md` (`packages/`, `examples/`, `docs/`, `.agents/notes/`) | Orders specific to that subtree | Repo-wide rules the root file already carries |
 | [architecture.md](https://github.com/deepseek-ai/deepseek-harness/blob/master/docs/architecture.md) | Ordered map: composition, core packages, loop, seams, extension points; read before changing `packages/` | Type definitions (→ subsystems), per-package detail (→ package READMEs), decision rationale (→ Agent Notes), implementation-status annotations |
 | [subsystems/](https://github.com/deepseek-ai/deepseek-harness/blob/master/docs/subsystems/README.md) | One reference page per subsystem: type definitions, semantics, and the generated Cordis API | Behavior narration (→ architecture.md) |
-| [Agent Notes](../agent-notes/README.md) | Active decision records: the why, what-was-given-up, and required verification; `implemented/` notes describe shipped reality in present tense | Migration plans, acceptance-task checklists, fixture walkthroughs, and spec-speak ("should…") once the decision has shipped; archived notes are frozen history, never current authority |
+| [Agent Notes](../.agents/notes/README.md) | Active decision records: the why, what-was-given-up, and required verification; `implemented/` notes describe shipped reality in present tense | Migration plans, acceptance-task checklists, fixture walkthroughs, and spec-speak ("should…") once the decision has shipped; archived notes are frozen history, never current authority |
 | [postmortem/](https://github.com/deepseek-ai/deepseek-harness/blob/master/docs/postmortem/README.md) | Incident stories — the only tier where war-story narrative belongs | — |
 | [cookbook/](https://github.com/deepseek-ai/deepseek-harness/blob/master/docs/cookbook/adding-a-package.md) | Step-by-step how-tos with numbered verify steps | Design rationale (→ the Agent Note each guide links) |
 | [user/](https://github.com/deepseek-ai/deepseek-harness/blob/master/docs/user/index.md) | Product-facing guides published by the documentation website | Generated reference tables, contributor procedures, decision history |
@@ -36,12 +36,12 @@ Placement: bugs → postmortems; rationale → Agent Notes; procedures → cookb
 ## Writing rules
 
 - **Document current state, not change history.** Avoid "previously/now/no longer", PRs, commits, and stack positions in durable prose; name the live mechanism. Put change stories in commits, PRs, Agent Notes, or postmortems; the latter two may cite merged PRs and issues as evidence.
-- **Every non-trivial change includes at least one Agent Note in the same PR.** Update the owning note or add one; only mechanical/local edits are exempt ([scope](../agent-notes/README.md#when-to-write-one)).
+- **Every non-trivial change includes at least one Agent Note in the same PR.** Update the owning note or add one; only mechanical/local edits are exempt ([scope](../.agents/notes/README.md#when-to-write-one)).
 - **One physical line per paragraph** (`verify-md-wrap`): use editor soft-wrap. Code blocks, tables, and list structure keep their formatting; code comments stay under the linter's column limit.
 - **Fenced `ts` blocks must compile** (`doc-typecheck`); a pasted type declaration and its original JSDoc use ` ```ts type-equiv `, while a body-stripped public class declaration uses ` ```ts public-api `; register either in the manifest so neither can drift ([mechanics](https://github.com/deepseek-ai/deepseek-harness/blob/master/docs/development.md#documenting-types-verbatim-ts-type-equiv)).
 - **The owning [subsystems page](https://github.com/deepseek-ai/deepseek-harness/blob/master/docs/subsystems/README.md) updates in the same change** that reshapes a documented type. `verify-type-equiv` catches drifted pastes, not never-documented new types; a type is documented on its declaring package group's page ([page scoping](https://github.com/deepseek-ai/deepseek-harness/blob/master/.agents/notes/implemented/process/2026-08-03-package-anchored-subsystem-pages.md)).
 - **Pairs update together**: [Terminology-guided](https://github.com/deepseek-ai/deepseek-harness/blob/master/docs/i18n/terminology.md), single-pass active-agent work repositions first-use annotations, preserves untouched prose, and re-records; `dsh-translate-docs` remains user-invoked ([contract](https://github.com/deepseek-ai/deepseek-harness/blob/master/docs/i18n/README.md)).
-- **Comments and JSDoc state complete contracts, not reasoning transcripts.** Preserve behavior, failure, timing, ownership, modality, exceptions, consequences, and non-obvious orientation; delete narration, test walkthroughs, review analysis, and code restatement. Keep the local contract and link its rationale. Use [dsh-prose-standard](../skills/dsh-prose-standard/SKILL.md) for details.
+- **Comments and JSDoc state complete contracts, not reasoning transcripts.** Preserve behavior, failure, timing, ownership, modality, exceptions, consequences, and non-obvious orientation; delete narration, test walkthroughs, review analysis, and code restatement. Keep the local contract and link its rationale. Use [dsh-prose-standard](../.agents/skills/dsh-prose-standard/SKILL.md) for details.
 - Write directly: name actors and facts ([decision](https://github.com/deepseek-ai/deepseek-harness/blob/master/.agents/notes/implemented/process/2026-08-09-concrete-prose-names-actors-and-recorded-facts.md)). Reserve `seam` for the defined capability. Name the exact check, type, API, operation, or behavior instead of metaphorical "gate", "vocabulary", or "surface".
 
 ## Wordcount Budgets
@@ -58,7 +58,7 @@ Ceilings are guardrails, not reduction targets. At or below target, retain at le
 
 ## The slop checklist
 
-Hunt these in any doc; [dsh-doc-standards](../skills/dsh-doc-standards/SKILL.md) runs this list as an audit:
+Hunt these in any doc; [dsh-doc-standards](../.agents/skills/dsh-doc-standards/SKILL.md) runs this list as an audit:
 
 - The same rule stated in more than one home. Grep a distinctive phrase; keep one home and link the rest.
 - Narrated history or war stories: "previously", "now", "no longer", "used to", "renamed", "was moved", PRs, or commits. State the current fact; link an Agent Note or postmortem when needed.
@@ -68,7 +68,7 @@ Hunt these in any doc; [dsh-doc-standards](../skills/dsh-doc-standards/SKILL.md)
 - Rationale repeated beside sibling methods instead of once at the owning capability or helper.
 - Paragraph walls: one paragraph carrying several rules and parenthetical asides. Split it or demote the detail to its home.
 - Emphasis inflation: bold, CAPS, or "critically" everywhere means nothing stands out. Reserve emphasis for the clause that changes behavior.
-- Spec-speak in `implemented/` Agent Notes: "should", migration plans, acceptance checklists. An implemented Agent Note describes what is, per the [implemented-note instructions](../agent-notes/implemented-notes-rules.md).
+- Spec-speak in `implemented/` Agent Notes: "should", migration plans, acceptance checklists. An implemented Agent Note describes what is, per the [implemented-note instructions](../.agents/notes/implemented/AGENTS.md).
 
 ## Cross-reference with machine-checkable links, never free prose
 

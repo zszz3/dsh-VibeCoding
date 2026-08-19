@@ -1,6 +1,6 @@
 # Skills:可复用的判断,不只是步骤
 
-这里 11 个 skill 从 [DeepSeek Harness](https://github.com/deepseek-ai/deepseek-harness) 原文移植(仅修正跨仓库链接)。
+这里 11 个 skill 从 [DeepSeek Harness](https://github.com/deepseek-ai/deepseek-harness) 原文移植(仅修正跨仓库链接),位置与上游一致(`.agents/skills/`),所以它们既是**阅读材料**,也是**能被 AI 直接加载的可用 skill**。
 
 **先理解它们为什么值钱。** skill 的价值**不在「记录了步骤」**——步骤谁都会写。它值钱在:**每个 skill 都焊死了一条「AI 很容易做错、而且做错了当时不易发现」的判断**。否则这条判断每换一个 AI、每个 session 都要重教一遍,而且会飘。
 
@@ -40,12 +40,12 @@
 1. **替换命令.** 搜 `pnpm run`,换成你们的门禁命令。
 2. **替换路径引用.** 本库内的链接已经修好;若你把 skill 复制到别的仓库,再对一遍相对路径。
 3. **保留判定与护栏,别删.** 移植时最容易犯的错是「只抄步骤、把护栏当啰嗦删掉」——那恰好丢掉了最值钱的部分。
-4. **加你们自己的.** 先问:**我们团队有哪条判断,是 AI 反复做错、且做错了当时看不出来的?** 骨架:[templates/SKILL.md](../templates/SKILL.md)。
+4. **加你们自己的.** 先问:**我们团队有哪条判断,是 AI 反复做错、且做错了当时看不出来的?** 骨架:[templates/SKILL.md](../../templates/SKILL.md)。
 
 ## 目录约定
 
 ```
-skills/<name>/
+.agents/skills/<name>/
   SKILL.md              主文件。frontmatter 的 description 用 "Use when …" 写清触发场景
   references/*.md       校准用的正反例、检索模式等(按需)
   scripts/*             skill 用到的脚本(按需)

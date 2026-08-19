@@ -1,6 +1,6 @@
 # AGENTS.md — Harness Packages
 
-These package-specific rules supplement the repo-wide [conventions](../templates/AGENTS.md#conventions).
+These package-specific rules supplement the repo-wide [conventions](https://github.com/deepseek-ai/deepseek-harness/blob/master/AGENTS.md#conventions).
 
 - **Plugin exports:** service packages default-export their service class; function plugins named-export `name` / `inject` / `Config` / `apply` and have no default export. Mixing the forms makes the Loader discard the function plugin's namespace ([postmortem](https://github.com/deepseek-ai/deepseek-harness/blob/master/docs/postmortem/0001-acp-default-export-drops-inject.md)).
 - **Optional services use `ctx.get(name)`.** Reserve `ctx.<name>` for declared injections; the property proxy is topology-sensitive, while strict `ctx.get` reads the global service store ([postmortem](https://github.com/deepseek-ai/deepseek-harness/blob/master/docs/postmortem/0001-acp-default-export-drops-inject.md)).
@@ -15,13 +15,13 @@ These package-specific rules supplement the repo-wide [conventions](../templates
 - **Publish state only at its commit point.** Emit each notification and update derived state only after the operation succeeds; derive caches, prompts, UI echoes, replay, and query views from one authoritative source.
 - **Apply bounds to the complete result.** Enforce byte, token, item, and time limits where the complete emitted or retained value, including wrappers and metadata, is known; test tiny and exact limits, oversized single chunks, and multibyte byte limits.
 - **Registry contributions prove disposal** through the HMR-safety test required by [testing policy](../docs/testing-policy.md): dispose the fiber and observe removal.
-- **Every package owns `./invariant`.** Register the manifest name; check an event/data relation or give empty installers package-specific `No runtime invariant:` reasons. Generated companions, unexplained empties, and ignored reporters fail [`verify-package-invariants`](https://github.com/deepseek-ai/deepseek-harness/blob/master/.agents/notes/implemented/architecture/2026-07-19-package-invariant-runtime-contracts.md).
+- **Every package owns `./invariant`.** Register the manifest name; check an event/data relation or give empty installers package-specific `No runtime invariant:` reasons. Generated companions, unexplained empties, and ignored reporters fail [`verify-package-invariants`](../.agents/notes/implemented/architecture/2026-07-19-package-invariant-runtime-contracts.md).
 
 [Naming rules](https://github.com/deepseek-ai/deepseek-harness/blob/master/docs/cookbook/adding-a-package.md#name-the-role-that-exists):
 
 - **Package tsconfig:** extends `tsconfig.base.json` (Client: `tsconfig.base.client.json`), uses `rootDir: src`, `outDir: lib/types`, and references each workspace dependency plus `runtime-diagnostics/invariants`; registers in exactly one aggregate. Only `api/remotes` splits for generated contracts; ordinary two-entry Client plugins do not ([layout](https://github.com/deepseek-ai/deepseek-harness/blob/master/docs/development.md#typescript-project-layout)).
 - `src/types.ts` contains only types — no runtime code.
 - Tests live at package level under `tests/`, not `src/__tests__/`.
-- A package's README and JSDoc are part of the change: altered behavior (config keys, defaults, error codes, wire fields) updates them in the same commit. `doc-sync` gates what it can; apply [dsh-prose-standard](../skills/dsh-prose-standard/SKILL.md) for complete, concise prose and verify accuracy against code.
+- A package's README and JSDoc are part of the change: altered behavior (config keys, defaults, error codes, wire fields) updates them in the same commit. `doc-sync` gates what it can; apply [dsh-prose-standard](../.agents/skills/dsh-prose-standard/SKILL.md) for complete, concise prose and verify accuracy against code.
 - Package READMEs document model, token, and KV-cache effects using the [canonical Model Experience format](https://github.com/deepseek-ai/deepseek-harness/blob/master/docs/cookbook/adding-a-package.md#4-write-the-package-readme).
 - Package READMEs put durable consumer gaps and non-obvious maintainer constraints under `## Known Limitations and Deferred Work`; ordinary cleanup stays in its TODO or Agent Note. Packages with none use a justified [allowlist entry](https://github.com/deepseek-ai/deepseek-harness/blob/master/scripts/verify-package-readme-limitations.ts) ([rationale](https://github.com/deepseek-ai/deepseek-harness/blob/master/.agents/notes/implemented/process/2026-07-10-readme-known-limitations-gate.md)).

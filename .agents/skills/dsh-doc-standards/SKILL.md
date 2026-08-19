@@ -5,14 +5,14 @@ description: 'Use when writing, moving, reviewing, or auditing documentation in 
 
 # Applying the DeepSeek Harness Documentation Standard
 
-The documentation rules live in [docs/AGENTS.md](../../docs/doc-standards.md). This workflow covers placement, corpus audits, budgets, and validation across Markdown, JSDoc, and code comments. It is guidance, not a script; use [dsh-prose-standard](../../skills/dsh-prose-standard/SKILL.md) for required coverage and editorial judgment, and never treat length alone as a defect.
+The documentation rules live in [docs/AGENTS.md](../../../docs/doc-standards.md). This workflow covers placement, corpus audits, budgets, and validation across Markdown, JSDoc, and code comments. It is guidance, not a script; use [dsh-prose-standard](../dsh-prose-standard/SKILL.md) for required coverage and editorial judgment, and never treat length alone as a defect.
 
 ## Sources of truth (read, don't re-summarize)
 
-- [docs/AGENTS.md](../../docs/doc-standards.md) — hierarchy, tutorial/reference forms, taxonomy, budgets, and slop checklist.
-- [.agents/notes/README.md](../../agent-notes/README.md) — when a decision earns an Agent Note, how to file it, and what goes inside one (the header block, per-lifecycle skeleton, and Alternatives-considered mandate, gated by `verify-agent-note-format`); [docs/postmortem/README.md](https://github.com/deepseek-ai/deepseek-harness/blob/master/docs/postmortem/README.md) — when an incident earns a postmortem.
+- [docs/AGENTS.md](../../../docs/doc-standards.md) — hierarchy, tutorial/reference forms, taxonomy, budgets, and slop checklist.
+- [.agents/notes/README.md](../../notes/README.md) — when a decision earns an Agent Note, how to file it, and what goes inside one (the header block, per-lifecycle skeleton, and Alternatives-considered mandate, gated by `verify-agent-note-format`); [docs/postmortem/README.md](https://github.com/deepseek-ai/deepseek-harness/blob/master/docs/postmortem/README.md) — when an incident earns a postmortem.
 - [docs/i18n/README.md](https://github.com/deepseek-ai/deepseek-harness/blob/master/docs/i18n/README.md) — the bilingual pairing rules; editing either side of a pair obligates the counterpart in the same change.
-- Root [AGENTS.md](../../templates/AGENTS.md) — the standing orders whose budget discipline this skill protects.
+- Root [AGENTS.md](https://github.com/deepseek-ai/deepseek-harness/blob/master/AGENTS.md) — the standing orders whose budget discipline this skill protects.
 - [Archived Agent Notes](https://github.com/deepseek-ai/deepseek-harness/blob/master/.agents/notes/archived/AGENTS.md) — frozen historical snapshots excluded from editorial maintenance and evolving documentation gates.
 
 ## Review structure before prose
@@ -37,11 +37,11 @@ Then check constraints that make placement expensive or wrong:
 After the structural pass, hunt the standard's slop checklist with the cheapest probes first. Verify and fetch the PR's live base, then run `pnpm --silent run change-scope --base <verified-base-ref>` to identify committed and dirty paths before applying semantic judgment. After a retarget or base merge, rerun the report and audit prose introduced by the new base.
 
 1. Measure: `pnpm run verify-doc-budgets --list`, then `git ls-files '*.md' ':(exclude)vendor/**' | xargs wc -w | sort -rn | head -30` to spot unbudgeted outliers.
-2. Hunt reasoning-transcript leakage — narrated history, dead design-session citations, review choreography, control-flow narration, test walkthroughs — with [dsh-trim-cot-leakage](../../skills/dsh-trim-cot-leakage/SKILL.md), which defines the taxonomy, recall batteries, and rules for what to keep or delete. Preserve only a non-obvious contract or durable rationale; the same rationale repeated beside sibling methods keeps one home.
+2. Hunt reasoning-transcript leakage — narrated history, dead design-session citations, review choreography, control-flow narration, test walkthroughs — with [dsh-trim-cot-leakage](../dsh-trim-cot-leakage/SKILL.md), which defines the taxonomy, recall batteries, and rules for what to keep or delete. Preserve only a non-obvious contract or durable rationale; the same rationale repeated beside sibling methods keeps one home.
 3. Hunt duplication by grepping distinctive phrases. Keep one home and replace other copies with links.
 4. Replace hand-written catalogs, test/status inventories, and JSDoc restatements with the authoritative tree, script, or generated reference.
 5. In `implemented/` Agent Notes, remove migration plans, acceptance-task checklists, and future-tense spec language. Keep concise verification contracts that identify the behaviors and tiers pinning the shipped decision, plus named coverage gaps.
-6. If removing prose changes a promised behavior rather than its explanation, use a proposed Agent Note first (follow [dsh-find-simplifications](../../skills/dsh-find-simplifications/SKILL.md)).
+6. If removing prose changes a promised behavior rather than its explanation, use a proposed Agent Note first (follow [dsh-find-simplifications](../dsh-find-simplifications/SKILL.md)).
 
 Exclude `.agents/notes/archived/` from corpus audits and edits. Active prose may repair, redirect, or delete an inbound link, but never follow an archive-wide cleanup into the frozen target.
 
@@ -49,8 +49,8 @@ Keep every load-bearing rule, preferably as one to three lines plus a link to it
 
 ## When verify-doc-budgets goes red
 
-Apply the ordered relocate-condense-raise policy in [docs/AGENTS.md](../../docs/doc-standards.md); this skill only supplies the workflow probes above.
+Apply the ordered relocate-condense-raise policy in [docs/AGENTS.md](../../../docs/doc-standards.md); this skill only supplies the workflow probes above.
 
 ## Validation and PR hygiene
 
-Run at least `pnpm run doc-sync`, `pnpm run lint`, and `git diff --check`; JSDoc changes may regenerate catalogs. If a paired doc changed, follow the [lightweight routine path](../../docs/doc-standards.md#writing-rules) and run `pnpm run verify-translation-pairing --write <pair>`. The PR body should give word deltas, explain any deliberately long exception, and list checks.
+Run at least `pnpm run doc-sync`, `pnpm run lint`, and `git diff --check`; JSDoc changes may regenerate catalogs. If a paired doc changed, follow the [lightweight routine path](../../../docs/doc-standards.md#writing-rules) and run `pnpm run verify-translation-pairing --write <pair>`. The PR body should give word deltas, explain any deliberately long exception, and list checks.

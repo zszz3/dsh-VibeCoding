@@ -26,7 +26,7 @@
 2. **分层就近** —— 根目录放通用规则,子目录放该目录专属规则,AI 在哪干活就自动叠加哪层。
 3. **厂商中立** —— `CLAUDE.md` 软链到 `AGENTS.md`,Claude Code 读前者、Codex 读后者,**物理上是同一个文件**。这正是 dsh 能同时被多种 AI 开发的前提。
 
-**怎么做.** 抄 [templates/AGENTS.md](../templates/AGENTS.md),把占位处换成你项目的内容,建软链接,给它设字数上限并用脚本卡住。
+**怎么做.** 抄 [templates/AGENTS.md](../templates/AGENTS.md)(本库自己那份现行规则在根 [AGENTS.md](../AGENTS.md),可作范例),把占位处换成你项目的内容,建软链接,给它设字数上限并用脚本卡住。
 
 **真实例子.** dsh 给根 `AGENTS.md` 设了约 1600 词上限,并用门禁强制——因为这文件每个 session 都占上下文,一膨胀就既烧钱又淹没重点。文档分层规则见 [docs/doc-standards.md](doc-standards.md)。
 
@@ -54,7 +54,7 @@
 4. **永不把一篇改成相反的决策** —— 要反悔,新写一篇取代它,两篇互相链接。
 5. **新增任意一篇都触发「取代检查」**:搜活跃记录里有没有讲同一决策的旧记录;完全被取代的同 PR 归档,部分取代的两者都保持活跃并互链。
 
-完整制度见 [agent-notes/README.md](../agent-notes/README.md);已落地记录如何与现实保持一致见 [agent-notes/implemented-notes-rules.md](../agent-notes/implemented-notes-rules.md)。
+完整制度见 [agent-notes/README.md](../.agents/notes/README.md);已落地记录如何与现实保持一致见 [agent-notes/implemented-notes-rules.md](../.agents/notes/implemented/AGENTS.md)。
 
 **四个真实例子(都在讲同一件事:别重踩).**
 
@@ -87,9 +87,9 @@
 
 **为什么有效.** AI 的坏习惯不是随机的,是**成体系、可预测**的,所以能逐类立规矩去治:
 
-1. **清理「思维链泄漏」** —— AI 爱把推理过程写进注释和文档:`(decision 7)`、`used to / no longer`、「先做 X 再做 Y」。判定就一句话:**「一个只看当前代码、看不到任何对话记录的读者,能否解析每个引用、验证每个论断?」**不能就重写。完整规则:[skills/dsh-trim-cot-leakage](../skills/dsh-trim-cot-leakage/SKILL.md)。
+1. **清理「思维链泄漏」** —— AI 爱把推理过程写进注释和文档:`(decision 7)`、`used to / no longer`、「先做 X 再做 Y」。判定就一句话:**「一个只看当前代码、看不到任何对话记录的读者,能否解析每个引用、验证每个论断?」**不能就重写。完整规则:[skills/dsh-trim-cot-leakage](../.agents/skills/dsh-trim-cot-leakage/SKILL.md)。
 2. **验证世界,而非自我报告** —— 测试断言必须**重跑命令、重读文件**外部核验,不能探测 AI 自己的输出。否则「会作弊的 agent」靠嘴上说「我测过了」就能蒙混过关。
-3. **措辞具体化** —— 禁止隐喻、禁止「gate / surface / shape」这类空词,要求点名具体的检查、类型、操作。完整标准:[skills/dsh-prose-standard](../skills/dsh-prose-standard/SKILL.md)。
+3. **措辞具体化** —— 禁止隐喻、禁止「gate / surface / shape」这类空词,要求点名具体的检查、类型、操作。完整标准:[skills/dsh-prose-standard](../.agents/skills/dsh-prose-standard/SKILL.md)。
 
 **自查清单.**
 
@@ -106,17 +106,17 @@
 
 | Skill | 它固化的那条「不显然判断」 |
 |---|---|
-| [`dsh-trim-cot-leakage`](../skills/dsh-trim-cot-leakage/SKILL.md) | 「只看 HEAD 的读者能否验证每个论断?」不能就删 —— 外加一张「什么**不算**泄漏」的保留清单,**防 AI 矫枉过正把真信息也删了** |
-| [`dsh-prose-standard`](../skills/dsh-prose-standard/SKILL.md) | 「先枚举命题,再动笔」:每条命题(谁做什么 / 条件时序 / must-may-never / 负向保证 / 所有权后果)都要留住;**「字数变少本身不是改进」** |
-| [`dsh-find-simplifications`](../skills/dsh-find-simplifications/SKILL.md) | 「强候选 vs 水候选」:先把消费者分成生产 / 非生产 / 模糊三类看真实调用点;并明确「双适配器、双后端是**有意为之**,别当低垂果实删」 |
-| [`dsh-code-review`](../skills/dsh-code-review/SKILL.md) | 「指南不是清单;一条有据的 blocker 胜过一堆 nits」+ 收到审查时**逐条技术核实、可反驳,不许表演性同意** |
-| [`dsh-merging-stacked-prs`](../skills/dsh-merging-stacked-prs/SKILL.md) | 「让 GitHub 拥有栈语义」:必须用官方栈命令,绝不手工逐个 merge + retarget 去模拟;没官方支持就**硬停** |
+| [`dsh-trim-cot-leakage`](../.agents/skills/dsh-trim-cot-leakage/SKILL.md) | 「只看 HEAD 的读者能否验证每个论断?」不能就删 —— 外加一张「什么**不算**泄漏」的保留清单,**防 AI 矫枉过正把真信息也删了** |
+| [`dsh-prose-standard`](../.agents/skills/dsh-prose-standard/SKILL.md) | 「先枚举命题,再动笔」:每条命题(谁做什么 / 条件时序 / must-may-never / 负向保证 / 所有权后果)都要留住;**「字数变少本身不是改进」** |
+| [`dsh-find-simplifications`](../.agents/skills/dsh-find-simplifications/SKILL.md) | 「强候选 vs 水候选」:先把消费者分成生产 / 非生产 / 模糊三类看真实调用点;并明确「双适配器、双后端是**有意为之**,别当低垂果实删」 |
+| [`dsh-code-review`](../.agents/skills/dsh-code-review/SKILL.md) | 「指南不是清单;一条有据的 blocker 胜过一堆 nits」+ 收到审查时**逐条技术核实、可反驳,不许表演性同意** |
+| [`dsh-merging-stacked-prs`](../.agents/skills/dsh-merging-stacked-prs/SKILL.md) | 「让 GitHub 拥有栈语义」:必须用官方栈命令,绝不手工逐个 merge + retarget 去模拟;没官方支持就**硬停** |
 
 看出共性了:**每个 skill 的核心都是一条判断,被压缩成「一句可执行规则 + 一张防过度的护栏」**。护栏那半往往比判定更能体现功力——它拦住的正是「热心 AI 一删到底」。
 
 **怎么落地.** 别一上来写操作手册。先问:**我们团队有哪条判断,是 AI 反复做错、而且做错了当时看不出来的?** 把它写成一个 skill(骨架:[templates/SKILL.md](../templates/SKILL.md)),`description` 用 `Use when …` 写清触发场景让 AI 自己判断何时加载,并标注「**guidance, not a checklist**」让它保持判断而非机械打勾。
 
-逐个 skill 的说明与可迁移度:[skills/README.md](../skills/README.md)。
+逐个 skill 的说明与可迁移度:[skills/README.md](../.agents/skills/README.md)。
 
 ## 七、机制⑥:多 AI 并行 + AI 审 AI
 
@@ -127,8 +127,8 @@
 **怎么做.**
 
 1. **隔离** —— 每个 AI 在自己的 git worktree 干活,分支带来源前缀(`codex/`、`worktree/`),互不干扰。
-2. **依赖链** —— 相互依赖的改动用官方 stacked PR 串起来([skills/dsh-merging-stacked-prs](../skills/dsh-merging-stacked-prs/SKILL.md))。
-3. **AI 审 AI** —— 审查者 AI 加载审查 skill、拿整套仓库标准来审([skills/dsh-code-review](../skills/dsh-code-review/SKILL.md));硬规矩:**逐条核实、技术层面修复或反驳,不许表演性同意**。
+2. **依赖链** —— 相互依赖的改动用官方 stacked PR 串起来([skills/dsh-merging-stacked-prs](../.agents/skills/dsh-merging-stacked-prs/SKILL.md))。
+3. **AI 审 AI** —— 审查者 AI 加载审查 skill、拿整套仓库标准来审([skills/dsh-code-review](../.agents/skills/dsh-code-review/SKILL.md));硬规矩:**逐条核实、技术层面修复或反驳,不许表演性同意**。
 4. **合并即回填记忆** —— PR 实现了某个提案,同一个改动里就把对应记录从「提案」改写成「已发布」的现在时。
 
 一次改动的完整生命周期:
