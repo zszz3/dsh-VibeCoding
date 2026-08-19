@@ -1,4 +1,12 @@
-- [教学正文](/)
+- [总览](/)
+- **教程**
+  - [一、常驻规则:AGENTS.md](guide/01-agents-md.md)
+  - [二、决策记录:Agent Notes](guide/02-agent-notes.md)
+  - [三、机器门禁:用检查取代信任](guide/03-gates.md)
+  - [四、针对 AI 坏习惯的规范](guide/04-bad-habits.md)
+  - [五、Skills:把判断固化下来](guide/05-skills.md)
+  - [六、多个 AI 并行,互相审](guide/06-parallel-and-review.md)
+  - [七、怎么开始](guide/07-adoption.md)
 - **常驻规则**
   - [根:AGENTS.md](AGENTS.md)
   - [docs/ 文档规则](docs/AGENTS.md)
@@ -11,7 +19,6 @@
   - [缺陷模式](docs/defensive-patterns.md)
   - [贡献者流程](docs/development.md)
 - **Skills**
-  - [索引与迁移难度](/#五skills)
   - [dsh-archive-agent-notes](.agents/skills/dsh-archive-agent-notes/SKILL.md)
   - [dsh-code-review](.agents/skills/dsh-code-review/SKILL.md)
   - [dsh-doc-site-sync](.agents/skills/dsh-doc-site-sync/SKILL.md)
@@ -249,4 +256,3 @@
     - [Adopt execa for hand-rolled test subprocess plumbing](.agents/notes/archived/testing/2026-07-26-execa-for-test-subprocess-plumbing.md)
 - **来源与授权**
   - [ATTRIBUTION](ATTRIBUTION.md)
-  - [LICENSE](LICENSE)
