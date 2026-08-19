@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <title>dsh-VibeCoding · 跟 AI 协同开发</title>
+  <meta name="description" content="DeepSeek Harness 跟 AI 协同开发用的那套文件,加一篇讲它们怎么用的文章。" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0" />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/docsify@4/lib/themes/vue.css" />
+  <style>
+    :root { --theme-color: #42545c; }
+    .markdown-section { max-width: 52rem; }
+    .markdown-section table { display: table; width: 100%; }
+    .markdown-section pre > code { font-size: .85rem; }
+    .sidebar ul li p { margin: .6em 0 .2em; font-weight: 600; color: #364149; }
+    .mermaid { text-align: center; margin: 1.4em 0; }
+    .app-name-link img { display: none; }
+  </style>
+</head>
+<body>
+  <div id="app">加载中…</div>
+  <script>
+    window.$docsify = {
+      name: 'dsh-VibeCoding',
+      repo: 'https://github.com/zszz3/dsh-VibeCoding',
+      loadSidebar: true,
+      subMaxLevel: 3,
+      maxLevel: 4,
+      auto2top: true,
+      relativePath: true,
+      search: {
+        depth: 3,
+        placeholder: '搜索…',
+        noData: '找不到结果',
+        paths: 'auto'
+      },
+      // Mermaid 代码块交给 mermaid 渲染,其余保持默认高亮
+      markdown: {
+        renderer: {
+          code: function (code, lang) {
+            if (lang === 'mermaid') {
+              return '<div class="mermaid">' + code + '</div>';
+            }
+            return this.origin.code.apply(this, arguments);
+          }
+        }
+      },
+      plugins: [
+        function (hook) {
+          hook.doneEach(function () {
+            if (window.mermaid) {
+              var blocks = document.querySelectorAll('.mermaid:not([data-processed])');
+              if (blocks.length) { window.mermaid.run({ nodes: blocks }); }
+            }
+          });
+        }
+      ]
+    };
+  </script>
+  <script src="https://cdn.jsdelivr.net/npm/docsify@4"></script>
+  <script src="https://cdn.jsdelivr.net/npm/docsify@4/lib/plugins/search.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/docsify-sidebar-collapse@1/dist/docsify-sidebar-collapse.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/prismjs@1/components/prism-bash.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/prismjs@1/components/prism-typescript.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/prismjs@1/components/prism-json.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/prismjs@1/components/prism-yaml.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.min.js"></script>
+  <script>
+    if (window.mermaid) { window.mermaid.initialize({ startOnLoad: false, theme: 'neutral' }); }
+  </script>
+</body>
+</html>

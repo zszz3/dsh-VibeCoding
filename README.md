@@ -94,7 +94,7 @@ stateDiagram-v2
 
 制度全文在 [.agents/notes/README.md](.agents/notes/README.md),配套的还有[已落地记录怎么跟现实保持一致](.agents/notes/implemented/AGENTS.md)和[归档规则](.agents/notes/archived/AGENTS.md)。
 
-仓库里放了 132 篇真实记录:`process` 和 `testing` 两类全收(讲怎么工作的,跟具体产品无关),加上本仓库引用到的和下面举例的。四种生命周期都有。其余按类别归属留在上游,链接会指过去。
+仓库里放了 204 篇真实记录,六个类别、四种生命周期都有。收录规则是:`process` 和 `testing` 两类全收(它们讲的是怎么工作,跟具体产品无关);`proposed` 和 `rejected` 全收(数量不多,正好看到另两种生命周期长什么样);其余四类各从 `implemented` 里按时间均匀取十几篇;本仓库引用到的和下面举例的都补齐。没收的留在上游,链接会指过去。
 
 ### 四个例子
 
@@ -267,7 +267,7 @@ scripts/AGENTS.md        脚本规则
   notes/README.md        决策记录制度全文
   notes/implemented/AGENTS.md   已落地记录的维护规则
   notes/archived/AGENTS.md      归档规则
-  notes/**/*.md          132 篇真实决策记录(process + testing 全收)
+  notes/**/*.md          204 篇真实决策记录,六类别四生命周期
   skills/                11 个 skill,含 references 与 scripts
 docs/testing.md          测试策略
 docs/defensive-patterns.md  生命周期、并发、子进程、teardown 的缺陷模式

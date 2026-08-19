@@ -18,32 +18,33 @@ MIT 允许再分发和改编,要求保留版权与许可声明,本仓库的 `LIC
 | `AGENTS.md` | 根常驻规则 |
 | `docs/AGENTS.md`、`packages/AGENTS.md`、`scripts/AGENTS.md`、`.github/AGENTS.md` | 各子树的常驻规则 |
 | `.agents/notes/AGENTS.md`、`README.md`、`implemented/AGENTS.md`、`archived/AGENTS.md` | 决策记录制度 |
-| `.agents/notes/**/*.md` | 132 篇真实的决策记录,选取范围见下 |
+| `.agents/notes/**/*.md` | 204 篇真实的决策记录,选取范围见下 |
 | `.agents/skills/*` | 11 个 skill,含 `references/` 与 `scripts/` |
 | `docs/testing.md`、`docs/defensive-patterns.md`、`docs/development.md` | 测试策略、缺陷模式、贡献流程 |
 
 保留原路径有两个作用:这个布局本身就是「分层就近」的样子;dsh 原文里的相对链接大部分能直接生效,不用改写,改得越少出错的机会越少。
 
-## 决策记录为什么是 132 篇,不是 693 篇
+## 决策记录为什么是 204 篇,不是 693 篇
 
-上游有 693 篇。全部搬过来会塞进大量 dsh 产品内部的内容——Cordis 插件树、会话日志格式、TypeScript 构建配置,对外部读者用处不大。这里按三条规则选:
+上游有 693 篇。全收会塞进大量 dsh 产品内部的内容——Cordis 插件树、会话日志格式、TypeScript 构建配置,对外部读者用处不大。这里按四条规则选,六个类别、四种生命周期都覆盖到:
 
-1. **`process` 和 `testing` 两类全收。** 这两类讲的是怎么工作:流程、工具、政策、测试策略,跟具体产品无关。包含 `implemented`、`proposed`、`rejected`、`archived` 全部四种生命周期。
-2. **本仓库其他文件引用到的都收。** 这样规则文件里的引用不会落空。
-3. **README 举的例子都收。**
+1. **`process` 和 `testing` 两类全收。** 这两类讲的是怎么工作:流程、工具、政策、测试策略,跟具体产品无关。
+2. **`proposed` 和 `rejected` 全收。** 数量不多,但能看到提案态和被否态的写法,以及被否的理由怎么记。
+3. **`feature`、`bug-fix`、`simplification`、`architecture` 四类**,各从 `implemented` 里按文件日期均匀取十几篇,覆盖早期到近期。
+4. **本仓库其他文件引用到的、以及 README 举例的,全部补齐**,这样引用不会落空。
 
-其余按类别归属留在上游,`README.md` 与各文件里的链接会指过去。上游的中文对照页(`.zh.md`)与配对边车(`.i18n.yaml`)没有收录,那套机制依赖上游的 Git 合并驱动和门禁脚本。
+没收的留在上游,`README.md` 与各文件里的链接会指过去。上游的中文对照页(`.zh.md`)与配对边车(`.i18n.yaml`)没有收录,那套机制依赖上游的 Git 合并驱动和门禁脚本。
 
 ## 唯一改动过的地方:跨仓库链接
 
-- 这里收录了的目标,链接保持原样(379 条本地链接)。
-- 没收录的目标,改成指向上游 GitHub 的绝对链接(407 条),点进去能看到原始内容,不会碰到断链。
+- 这里收录了的目标,链接保持原样(643 条本地链接)。
+- 没收录的目标,改成指向上游 GitHub 的绝对链接,点进去能看到原始内容,不会碰到断链。
 
 行内代码里形如 `` `[English](foo.md)` `` 的示例不是链接,没动过。
 
 ## 本仓库自己写的
 
-两份:`README.md`(教学文章)和 `ATTRIBUTION.md`(本文件)。
+四份:`README.md`(教学文章)、`ATTRIBUTION.md`(本文件),以及网站需要的 `index.html` 与 `_sidebar.md`。
 
 ## 这些文件描述的是 dsh,不是本仓库
 
