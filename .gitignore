@@ -1,0 +1,6 @@
+# 站点构建产物与依赖
+site/node_modules/
+site/dist/
+site/.astro/
+# 投影出来的站点内容由 site/scripts/project.mjs 生成
+site/src/content/docs/
