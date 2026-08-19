@@ -2,7 +2,7 @@
 
 English | [中文](https://github.com/deepseek-ai/deepseek-harness/blob/master/docs/defensive-patterns.zh.md)
 
-Hard-won bug-class rules: each pattern below is a class of defect that actually shipped or nearly shipped here, stated as the rule that prevents its recurrence. Read this before writing lifecycle, concurrency, subprocess, or teardown code. Test-tier counterparts (real entry path, world-verification, resource ownership) are in [testing.md](../docs/testing-policy.md).
+Hard-won bug-class rules: each pattern below is a class of defect that actually shipped or nearly shipped here, stated as the rule that prevents its recurrence. Read this before writing lifecycle, concurrency, subprocess, or teardown code. Test-tier counterparts (real entry path, world-verification, resource ownership) are in [testing.md](testing.md).
 
 ## Report orthogonal outcomes independently
 
