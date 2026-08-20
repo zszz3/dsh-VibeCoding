@@ -1,14 +1,73 @@
-/* 站点样式补充:中文正文行距、表格与 Mermaid 图的排版。 */
+/* 站点样式:排版密度、配色与外链标记。Starlight 默认值偏松、强调色偏亮,这里收一收。 */
 
 :root {
   --sl-font: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'PingFang SC',
     'Hiragino Sans GB', 'Microsoft YaHei', 'Noto Sans SC', sans-serif;
+
+  /* 块级元素之间的间距,默认 1rem 配上中文行距显得松 */
+  --sl-content-gap-y: 0.7rem;
+
+  /* 暗色模式:偏青的蓝,比默认那种发白的淡蓝更沉稳 */
+  --sl-color-accent-low: hsl(200 42% 17%);
+  --sl-color-accent: hsl(200 68% 46%);
+  --sl-color-accent-high: hsl(197 58% 74%);
 }
 
-/* 中文段落用更宽的行距,长段落更好读 */
-.sl-markdown-content p,
-.sl-markdown-content li {
-  line-height: 1.85;
+:root[data-theme='light'] {
+  --sl-color-accent-low: hsl(200 58% 92%);
+  --sl-color-accent: hsl(201 76% 32%);
+  --sl-color-accent-high: hsl(202 68% 21%);
+}
+
+/* 中文正文:行距略收,兼顾密度与可读性 */
+.sl-markdown-content :is(p, li) {
+  line-height: 1.72;
+}
+
+/* 桌面端默认 h1 用 5xl、h2 用 4xl,相对正文过重,各降一档 */
+@media (min-width: 50em) {
+  :root {
+    --sl-text-h1: var(--sl-text-3xl);
+    --sl-text-h2: var(--sl-text-2xl);
+    --sl-text-h3: var(--sl-text-xl);
+    --sl-text-h4: var(--sl-text-lg);
+  }
+}
+
+/* 标题与上一段之间默认留 1.5em,对二级标题来说偏大 */
+.sl-markdown-content
+  :not(h1, h2, h3, h4, h5, h6)
+  + :is(h2, h3, h4, h5, h6):not(:where(.not-content *)) {
+  margin-top: 1.6rem;
+}
+
+.sl-markdown-content :is(h2, h3) {
+  line-height: 1.35;
+}
+
+/* 链接:靠下划线而不是靠亮色来区分,hover 不跳成纯白 */
+.sl-markdown-content a:not(:where(.not-content *)) {
+  text-decoration: underline;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 0.22em;
+  text-decoration-color: color-mix(in srgb, currentColor 35%, transparent);
+  transition: text-decoration-color 0.12s ease, color 0.12s ease;
+}
+
+.sl-markdown-content a:hover:not(:where(.not-content *)) {
+  color: var(--sl-color-text-accent);
+  text-decoration-color: currentColor;
+}
+
+/* 外链加一个小箭头,让「会离开本站」这件事不靠颜色也能看出来 */
+.sl-markdown-content a[href^='http']:not(:where(.not-content *))::after {
+  content: '↗';
+  display: inline-block;
+  margin-inline-start: 0.15em;
+  font-size: 0.78em;
+  vertical-align: 0.08em;
+  opacity: 0.5;
+  text-decoration: none;
 }
 
 /* 表格在这个站里承载了不少对照信息,给它更紧凑的字号和可横向滚动的容器 */
@@ -16,11 +75,30 @@
   font-size: var(--sl-text-sm);
   display: block;
   overflow-x: auto;
+  border-collapse: collapse;
 }
 
-.sl-markdown-content th,
-.sl-markdown-content td {
+.sl-markdown-content :is(th, td) {
   vertical-align: top;
+  padding-block: 0.5rem;
+  line-height: 1.6;
+}
+
+/* 表格内的链接不再加箭头,否则对照表会很碎 */
+.sl-markdown-content td a[href^='http']::after,
+.sl-markdown-content th a[href^='http']::after {
+  content: none;
+}
+
+/* 代码块与行内代码:字号略收,避免和正文抢视觉重量 */
+.sl-markdown-content code:not(:where(pre *)) {
+  font-size: 0.86em;
+}
+
+/* 引用块:去掉默认的斜体感,改成左侧色条 */
+.sl-markdown-content blockquote:not(:where(.not-content *)) {
+  border-inline-start-color: var(--sl-color-accent);
+  padding-inline-start: 1rem;
 }
 
 /* Mermaid 图渲染前是纯文本,先隐藏避免闪烁 */
@@ -29,7 +107,7 @@
 }
 
 .mermaid {
-  margin: 1.5rem 0;
+  margin-block: 1.2rem;
   text-align: center;
   overflow-x: auto;
 }
