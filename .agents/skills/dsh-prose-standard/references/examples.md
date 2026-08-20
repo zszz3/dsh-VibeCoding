@@ -1,5 +1,7 @@
 # Distilled prose examples
 
+English | [中文](examples.zh.md)
+
 Use these examples to identify the governing principle, not as text templates. “Balanced” preserves every load-bearing proposition with the least explanation needed at that location.
 
 ## Preserve every factual clause

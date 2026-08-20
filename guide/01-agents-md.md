@@ -14,7 +14,7 @@
 
 ## 里面写什么
 
-[dsh 的根 AGENTS.md](../AGENTS.md) 分九节。把它们按作用归一下,就是一份可以照着填的清单:
+[dsh 的根 AGENTS.md](../AGENTS.zh.md) 分九节。把它们按作用归一下,就是一份可以照着填的清单:
 
 | 这一节 | 作用 | 具体写什么 |
 |---|---|---|
@@ -68,14 +68,14 @@
 
 | 文件 | 管什么 |
 |---|---|
-| [AGENTS.md](../AGENTS.md) | 根:项目定位、目录地图、命令表、代码约定 |
-| [docs/AGENTS.md](../docs/AGENTS.md) | 文档:分层、一个事实一个家、字数预算 |
-| [packages/AGENTS.md](../packages/AGENTS.md) | 包:插件导出形式、服务设计、边界校验 |
-| [scripts/AGENTS.md](../scripts/AGENTS.md) | 脚本 |
-| [.github/AGENTS.md](../.github/AGENTS.md) | CI 与 PR |
-| [.agents/notes/AGENTS.md](../.agents/notes/AGENTS.md) | 决策记录 |
+| [AGENTS.md](../AGENTS.zh.md) | 根:项目定位、目录地图、命令表、代码约定 |
+| [docs/AGENTS.md](../docs/AGENTS.zh.md) | 文档:分层、一个事实一个家、字数预算 |
+| [packages/AGENTS.md](../packages/AGENTS.zh.md) | 包:插件导出形式、服务设计、边界校验 |
+| [scripts/AGENTS.md](../scripts/AGENTS.zh.md) | 脚本 |
+| [.github/AGENTS.md](../.github/AGENTS.zh.md) | CI 与 PR |
+| [.agents/notes/AGENTS.md](../.agents/notes/AGENTS.zh.md) | 决策记录 |
 
-**好在哪。** 拿 [packages/AGENTS.md](../packages/AGENTS.md) 举例,它开头第一条就是:
+**好在哪。** 拿 [packages/AGENTS.md](../packages/AGENTS.zh.md) 举例,它开头第一条就是:
 
 > **Plugin exports:** service packages default-export their service class; function plugins named-export `name` / `inject` / `Config` / `apply` and have no default export.
 
@@ -85,7 +85,7 @@
 
 ### 子树那一份只写差异
 
-子目录的 `AGENTS.md` 开头一句就说明自己是补充,比如 [packages/AGENTS.md](../packages/AGENTS.md) 写的是「以下是针对包的规则,是对仓库全局约定的补充」。
+子目录的 `AGENTS.md` 开头一句就说明自己是补充,比如 [packages/AGENTS.md](../packages/AGENTS.zh.md) 写的是「以下是针对包的规则,是对仓库全局约定的补充」。
 
 **好在哪。** 它不重复根文件已有的内容。同一条规则出现在两处,改的时候必然漏一处,然后两份说法就开始冲突 —— AI 读到冲突的规则,行为不可预测。
 

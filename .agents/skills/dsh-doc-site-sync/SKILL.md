@@ -5,6 +5,8 @@ description: Use when publishing, updating, moving, or removing DeepSeek Harness
 
 # Synchronizing the DeepSeek Harness Documentation Site
 
+English | [中文](SKILL.zh.md)
+
 Keep repository Markdown as the only editable content source. Treat the website as a tested projection: [website/docs.ts](https://github.com/deepseek-ai/deepseek-harness/blob/master/website/docs.ts) selects public pages, [scripts/project-doc-site.ts](https://github.com/deepseek-ai/deepseek-harness/blob/master/scripts/project-doc-site.ts) rewrites them into the disposable `website/.generated/` tree, and VitePress builds that tree.
 
 Repository translations follow the sibling pairing contract: English `foo.md`, Chinese `foo.zh.md`, and `foo.i18n.yaml` live together. Never create `zh-CN/` or other locale directories for website content. The site route trees are independent of that source layout: `foo.zh.md` projects to the root route and `foo.md` projects to the matching `/en/` route.

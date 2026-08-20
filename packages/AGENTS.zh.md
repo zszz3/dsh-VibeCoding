@@ -1,6 +1,8 @@
 # AGENTS.md — Harness Packages(中文对照)
 
-> 这是 [packages/AGENTS.md](AGENTS.md) 的中文对照,供阅读方便。**英文原文是权威版本**,执行规则时以原文为准。术语译法参照 dsh 自己的约定:`agent`、`skill`、`seam`、`Agent Note`、`worktree` 等保留英文。
+[English 原文](AGENTS.md) | 中文
+
+> 这是英文原文的中文对照,供阅读方便。**英文原文是权威版本**,执行规则时以原文为准。术语译法参照 dsh 自己的约定:`agent`、`skill`、`seam`、`Agent Note`、`worktree` 等保留英文。
 
 以下是针对包的规则,是对仓库全局[约定](../AGENTS.zh.md#约定)的补充。
 
@@ -24,6 +26,6 @@
 - **包的 tsconfig:** 继承 `tsconfig.base.json`(Client 侧继承 `tsconfig.base.client.json`),使用 `rootDir: src`、`outDir: lib/types`,并且引用每一个 workspace 依赖以及 `runtime-diagnostics/invariants`;只注册进恰好一个 aggregate。只有 `api/remotes` 为了生成的契约而拆分;普通的双入口 Client 插件不拆([布局](../docs/development.md#typescript-project-layout))。
 - `src/types.ts` 只放类型 —— 不含运行时代码。
 - 测试放在包一级的 `tests/` 下,不放 `src/__tests__/`。
-- 包的 README 和 JSDoc 是改动的一部分:行为变了(配置键、默认值、错误码、wire 字段)就在同一个提交里更新它们。`doc-sync` 能卡住的它会卡;完整而精炼的行文参照 [dsh-prose-standard](../.agents/skills/dsh-prose-standard/SKILL.md),并对着代码核实准确性。
+- 包的 README 和 JSDoc 是改动的一部分:行为变了(配置键、默认值、错误码、wire 字段)就在同一个提交里更新它们。`doc-sync` 能卡住的它会卡;完整而精炼的行文参照 [dsh-prose-standard](../.agents/skills/dsh-prose-standard/SKILL.zh.md),并对着代码核实准确性。
 - 包的 README 用[规范的 Model Experience 格式](https://github.com/deepseek-ai/deepseek-harness/blob/master/docs/cookbook/adding-a-package.md#4-write-the-package-readme)记录对模型、token 和 KV 缓存的影响。
 - 包的 README 把持久存在的消费者缺口和不显然的维护者约束放在 `## Known Limitations and Deferred Work` 下;普通的清理工作留在它的 TODO 或 Agent Note 里。一条都没有的包使用一条有理由的[允许列表条目](https://github.com/deepseek-ai/deepseek-harness/blob/master/scripts/verify-package-readme-limitations.ts)([理由](../.agents/notes/implemented/process/2026-07-10-readme-known-limitations-gate.md))。

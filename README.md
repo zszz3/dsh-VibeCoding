@@ -1,8 +1,6 @@
 # dsh-VibeCoding
 
-[DeepSeek Harness](https://github.com/deepseek-ai/deepseek-harness)(简称 dsh)是 DeepSeek 开源的 agent harness。它自己就是用 AI 开发的——仓库分支里能看到 `codex/`、`worktree/`、`agent/` 这些前缀,是不同 AI agent 提交的。
-
-为了让 AI 真能干活,它在仓库里攒下了一整套配套文件:给 AI 每次开工读的规则、近七百篇决策记录、十一个把工作流固化下来的 skill、上百个自动门禁脚本。这些东西散在各个目录,不专门去翻很难注意到。
+[DeepSeek Harness](https://github.com/deepseek-ai/deepseek-harness)(简称 dsh)是 DeepSeek 开源的 agent harness。为了让 AI 真能干活,它在仓库里攒下了一整套配套文件:给 AI 每次开工读的规则、近七百篇决策记录、十一个把工作流固化下来的 skill、上百个自动门禁脚本。这些东西散在各个目录,不专门去翻很难注意到。
 
 **这个仓库把它们挑出来放到一起,原样不动,再配一份讲怎么用的教程。**
 
@@ -37,13 +35,13 @@
 
 | 你想看 | 去哪 |
 |---|---|
-| 「给 AI 读的规则」长什么样 | [根 AGENTS.md](AGENTS.md);另有五份子目录专属的([docs](docs/AGENTS.md)、[packages](packages/AGENTS.md)、[scripts](scripts/AGENTS.md)、[.github](.github/AGENTS.md)、[notes](.agents/notes/AGENTS.md)),六份叠起来就是「分层就近」的实物 |
+| 「给 AI 读的规则」长什么样 | [根 AGENTS.md](AGENTS.zh.md);另有五份子目录专属的([docs](docs/AGENTS.zh.md)、[packages](packages/AGENTS.zh.md)、[scripts](scripts/AGENTS.zh.md)、[.github](.github/AGENTS.zh.md)、[notes](.agents/notes/AGENTS.zh.md)),六份叠起来就是「分层就近」的实物 |
 | 决策记录怎么写、怎么流转 | [制度全文](.agents/notes/README.md);`.agents/notes/` 下有 204 篇真实记录,六个类别、四种生命周期都有 |
-| 一个 skill 里到底固化了什么 | [dsh-trim-cot-leakage](.agents/skills/dsh-trim-cot-leakage/SKILL.md) 最典型——一条判定加一张「什么不算泄漏」的护栏,后者拦的是 AI 清理时把 issue 号、豁免理由、实测数据一起删掉 |
+| 一个 skill 里到底固化了什么 | [dsh-trim-cot-leakage](.agents/skills/dsh-trim-cot-leakage/SKILL.zh.md) 最典型——一条判定加一张「什么不算泄漏」的护栏,后者拦的是 AI 清理时把 issue 号、豁免理由、实测数据一起删掉 |
 | 测试上有什么讲究 | [测试策略](docs/testing.md),里面「验证世界而不是验证自我报告」那节值得单独看 |
 
 ## 抄之前要知道的一件事
 
 这些原件是 dsh 的文件,里面的命令(`pnpm run test`)、目录(`packages/`)、技术选择(Cordis、ESM)说的都是 dsh 那个仓库,在这里不成立。当参考实现看,抄到自己项目时换成自己的事实,顺序见[第七篇](guide/07-adoption.md)。
 
-内容一字未改,唯一动过的是跨仓库链接。收录范围、改了哪些链接、哪些 skill 不容易搬,都在 [ATTRIBUTION.md](ATTRIBUTION.md) 里。
+原件正文一字未改,只动了跨仓库链接,以及在有中文对照的文件顶部加一行语言切换。收录范围、改了哪些链接、哪些 skill 不容易搬,都在 [ATTRIBUTION.md](ATTRIBUTION.md) 里。

@@ -1,6 +1,8 @@
 # Record Browser GIF(中文对照)
 
-> 这是 [SKILL.md](SKILL.md) 的中文对照,供阅读方便。**英文原文是权威版本**,执行规则时以原文为准。
+[English 原文](SKILL.md) | 中文
+
+> 这是英文原文的中文对照,供阅读方便。**英文原文是权威版本**,执行规则时以原文为准。
 
 该 skill 的 frontmatter(name:`record-browser-gif`;description:使用可用的内置浏览器、基于状态的帧捕获与确定性编码,把浏览器或 Web UI 交互演示录制成经过优化的 GIF;当任务包含把 GIF 挂到某个 PR 时,再发布到专用 assets 分支)定义了它的触发场景:当接到制作、录制或生成 GIF 来演示浏览器工作流时,以及在任何更改产品用户可见 GUI 行为、因此必须附上一段从该 PR 真实 server 与 model 流程录制的 GIF 的 PR 上使用。
 

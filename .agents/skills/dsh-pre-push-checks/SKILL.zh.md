@@ -1,6 +1,8 @@
 # DSH Pre-Push Checks(中文对照)
 
-> 这是 [SKILL.md](SKILL.md) 的中文对照,供阅读方便。**英文原文是权威版本**,执行规则时以原文为准。
+[English 原文](SKILL.md) | 中文
+
+> 这是英文原文的中文对照,供阅读方便。**英文原文是权威版本**,执行规则时以原文为准。
 
 在推送(包括 force push)、标记 ready for review、或宣称某 deepseek-harness 分支的检查已通过之前,以及在 `gh stack sync` 发布了重写后的各层分支之后立即,使用本 skill,用于为正在 outgoing 的改动或刚发布的改动选出覆盖面最小、能起到证据作用的本地检查集,而不是无脑跑整个仓库。
 

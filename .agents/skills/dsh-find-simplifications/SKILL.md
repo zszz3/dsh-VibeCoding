@@ -5,6 +5,8 @@ description: 'Use when working in the deepseek-harness repo to find non-obvious 
 
 # Finding DeepSeek Harness Simplifications
 
+English | [中文](SKILL.zh.md)
+
 This skill helps turn a broad "find things to simplify" request into evidence-backed Agent Notes that remove or collapse existing harness surface area. It is guidance, not a checklist: follow the code, keep judgment active, and prefer a few well-proven candidates over a pile of thin guesses.
 
 ## Start With Repo Context

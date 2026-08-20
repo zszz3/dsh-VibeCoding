@@ -1,5 +1,7 @@
 # AGENTS.md — Harness Packages
 
+English | [中文](AGENTS.zh.md)
+
 These package-specific rules supplement the repo-wide [conventions](../AGENTS.md#conventions).
 
 - **Plugin exports:** service packages default-export their service class; function plugins named-export `name` / `inject` / `Config` / `apply` and have no default export. Mixing the forms makes the Loader discard the function plugin's namespace ([postmortem](https://github.com/deepseek-ai/deepseek-harness/blob/master/docs/postmortem/0001-acp-default-export-drops-inject.md)).

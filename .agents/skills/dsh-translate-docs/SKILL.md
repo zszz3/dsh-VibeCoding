@@ -7,6 +7,8 @@ user-invocable: true
 
 # Translating DeepSeek-Harness docs
 
+English | [中文](SKILL.zh.md)
+
 ## Invocation boundary
 
 Run this extended workflow only when the user explicitly invokes `dsh-translate-docs` by name. Never select or load it for ordinary documentation work, from another skill, or from an inferred translation need; routine translation follows the one-shot, one-pass rule in [docs/AGENTS.md](../../../docs/AGENTS.md).

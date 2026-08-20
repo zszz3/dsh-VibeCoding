@@ -20,7 +20,7 @@ AI 写的东西,单看每一处都通顺,攒起来会有几种固定的毛病:
 
 > 一个只看当前代码、拿不到任何对话记录的读者,能不能解析每个引用、验证每个论断?
 
-不能,就重写。完整规则在 [dsh-trim-cot-leakage](../.agents/skills/dsh-trim-cot-leakage/SKILL.md),下一篇会拿它当例子细讲。
+不能,就重写。完整规则在 [dsh-trim-cot-leakage](../.agents/skills/dsh-trim-cot-leakage/SKILL.zh.md),下一篇会拿它当例子细讲。
 
 这条判定的出处是一篇决策记录:[committed-artifact-citations](../.agents/notes/implemented/process/2026-08-09-committed-artifact-citations.md)。它规定引用必须指向已提交的东西——issue 号、文件路径、外部标准都行,「我们上次聊的那个方案」不行。
 
@@ -48,7 +48,7 @@ AI 写的东西,单看每一处都通顺,攒起来会有几种固定的毛病:
 
 > write `response fields`, `JSON validation`, or `ESM exports` instead of `response shape`, `validation boundary`, or `module shape`.
 
-而且它不是一刀切禁用,而是「用之前先自问」。[dsh-prose-standard](../.agents/skills/dsh-prose-standard/SKILL.md) 的原话:
+而且它不是一刀切禁用,而是「用之前先自问」。[dsh-prose-standard](../.agents/skills/dsh-prose-standard/SKILL.zh.md) 的原话:
 
 > Treat `contract`, `boundary`, `shape`, `surface`, `seam`, `gate`, and `vocabulary` as terms to check before use, not banned words.
 

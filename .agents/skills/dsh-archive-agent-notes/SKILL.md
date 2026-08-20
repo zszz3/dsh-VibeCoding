@@ -5,6 +5,8 @@ description: Use when adding, auditing, pruning, archiving, restoring, or review
 
 # Archive DeepSeek Harness Agent Notes
 
+English | [中文](SKILL.zh.md)
+
 Reduce the active decision corpus without erasing history that can still guide work. Judge every note semantically; word count and age are discovery aids, never archive criteria.
 
 ## Read the contracts

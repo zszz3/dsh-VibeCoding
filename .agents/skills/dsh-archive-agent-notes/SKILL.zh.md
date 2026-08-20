@@ -1,6 +1,8 @@
 # Archive DeepSeek Harness Agent Notes(中文对照)
 
-> 这是 [SKILL.md](SKILL.md) 的中文对照,供阅读方便。**英文原文是权威版本**,执行规则时以原文为准。
+[English 原文](SKILL.md) | 中文
+
+> 这是英文原文的中文对照,供阅读方便。**英文原文是权威版本**,执行规则时以原文为准。
 
 本 skill 在 deepseek-harness 中新增、审计、修剪、归档、恢复或审阅 Agent Note 时触发:检查每条新 note 是否存在已被取代的现行记录,按未来决策价值对已实施 note 分类,删除已不再能防止某类诱人谬误(tempting fallacy)的已否决 note,并应用冻结的 archived/{kind} 三元组与清单(manifest)规则。
 
@@ -60,6 +62,6 @@
 
 ## 校验并报告
 
-运行归档校验器的聚焦测试、`pnpm run verify-archived-agent-notes`、`pnpm run doc-sync`、`pnpm run lint` 与 `git diff --check`;通过 [dsh-pre-push-checks](../dsh-pre-push-checks/SKILL.md) 选取任何其他证据。
+运行归档校验器的聚焦测试、`pnpm run verify-archived-agent-notes`、`pnpm run doc-sync`、`pnpm run lint` 与 `git diff --check`;通过 [dsh-pre-push-checks](../dsh-pre-push-checks/SKILL.zh.md) 选取任何其他证据。
 
 报告:保留的现行已实施 note、已归档的已实施 note、已保留/已删除的已否决 note、被否决的提议中 note(如有),以及每个真正 borderline 案例及其字数与选定结果。不要声称已归档的出站链接有效:归档校验器故意从不检查它们。

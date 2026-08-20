@@ -1,10 +1,12 @@
 # AGENTS.md(中文对照)
 
-> 这是根 [AGENTS.md](AGENTS.md) 的中文对照,供阅读方便。**英文原文是权威版本**,执行规则时以原文为准。
+[English 原文](AGENTS.md) | 中文
+
+> 这是英文原文的中文对照,供阅读方便。**英文原文是权威版本**,执行规则时以原文为准。
 >
 > 术语译法参照 dsh 自己的[术语表](https://github.com/deepseek-ai/deepseek-harness/blob/master/docs/i18n/terminology.md):`agent`、`skill`、`seam`、`waterfall`、`Agent Note`、`worktree` 等按约定保留英文;`plugin` 译作插件、`session` 译作会话、`capability` 译作能力、`prompt` 译作提示词、`tool` 译作工具、`snapshot` 译作快照。
 
-DeepSeek Harness 是一个建立在 vendored Cordis 之上的插件化 agent harness(智能体框架):**一切皆插件**。改 `packages/` 之前先读 [docs/architecture.md](https://github.com/deepseek-ai/deepseek-harness/blob/master/docs/architecture.md);文档工作遵循 [docs/AGENTS.md](docs/AGENTS.md)。
+DeepSeek Harness 是一个建立在 vendored Cordis 之上的插件化 agent harness(智能体框架):**一切皆插件**。改 `packages/` 之前先读 [docs/architecture.md](https://github.com/deepseek-ai/deepseek-harness/blob/master/docs/architecture.md);文档工作遵循 [docs/AGENTS.md](docs/AGENTS.zh.md)。
 
 ## 发布前的立场:地基优先于波及面
 
@@ -89,7 +91,7 @@ pnpm run demo:acp       # ACP 自动化服务端(需要 DEEPSEEK_API_KEY)
 
 ### 本地只跑相关的检查
 
-推送前用 [dsh-pre-push-checks](.agents/skills/dsh-pre-push-checks/SKILL.md) 选检查;**只报告实际跑过的命令**。`gh stack sync` 之后立即验证;检查通过之前不要合并。
+推送前用 [dsh-pre-push-checks](.agents/skills/dsh-pre-push-checks/SKILL.zh.md) 选检查;**只报告实际跑过的命令**。`gh stack sync` 之后立即验证;检查通过之前不要合并。
 
 - 证据要对上改动面:行为改动用聚焦测试,模型或用户输出用快照,文档用 `doc-sync`,发布路径用 build/hygiene 与构建产物冒烟,provider 行为用真实 API e2e。
 - 绝不为了提交或推送就默认跑整套,也不重复跑一个已经通过的检查。CI 负责穷尽覆盖与平台矩阵;只有在明确要求、诊断 CI,或者改动本身不可避免地覆盖整个仓库时,才在本地全排练一遍。
@@ -104,7 +106,7 @@ pnpm run demo:acp       # ACP 自动化服务端(需要 DEEPSEEK_API_KEY)
 - 每个 npm 包都叫 `@deepseek-ai/dsh-<name>`;vendored 的包被重新划归作用域([映射](https://github.com/deepseek-ai/deepseek-harness/blob/master/docs/rescope.md))并且 `private: true`。`@deepseek-ai/cordis` 是每个 harness 包的 peerDependency(同时也是 dev 依赖)。
 - 全面 ESM(`"type": "module"`)。跨包用包名引用,本地相对引用带 `.ts`。配置类子进程在纯 Node 下运行构建出的 `lib/`;源码回归测试用它们声明的启动器([测试政策](docs/testing.md#test-subprocess-launch-modes))。`dsh` CLI 的源码启动走 tsx 仅支持 ESM 的钩子(`node --import tsx/esm`),它能到达的模块必须保持 ESM(不能只有 CJS 导出)—— 因为在支持的引擎区间里,Node 原生的 TypeScript 模式不可用([源码启动契约](.agents/notes/implemented/architecture/2026-07-29-dsh-source-launch-tsx-esm.md))。Raw/Web 的 `cordis.yml` 里裸插件必须出现在其解析器 manifest 的 `dependencies` 中;`verify-cordis-config` 强制这一点。
 - **注册即 effect**:每一处贡献都经由 `ctx.effect()` / `ctx.on()`;注册表的 `register()` 返回处置器。
-- **运行时不变量断言的是「自己拥有的关系」。** 检查权威的事件流或可变数据,而不是服务或方法是否存在、插件的元数据或 effect、或者固定的纯示例。在不存在合理关系的情况下,一个给出解释的空伴生实现才是正确的([包的不变量规则](packages/AGENTS.md))。
+- **运行时不变量断言的是「自己拥有的关系」。** 检查权威的事件流或可变数据,而不是服务或方法是否存在、插件的元数据或 effect、或者固定的纯示例。在不存在合理关系的情况下,一个给出解释的空伴生实现才是正确的([包的不变量规则](packages/AGENTS.zh.md))。
 - **类型化事件用声明合并**以及可合并扩展的映射。事件的 JSDoc 需要 `@mode` 和 payload 的 `@param`;payload 里没有的 scoped key 需要 `@dshScopeScan unsupported`。公开的服务方法要记录参数和非 void 的返回值。`SessionEventMap` 的成员默认是「读取时必需」的 —— 不认识其类型的构建会拒绝这份日志,除非该事件带上信封的 `ignorable: true`;只有结构性的格式变化才会提升 `SESSION_FORMAT_VERSION`([机制](.agents/notes/implemented/architecture/2026-08-10-session-log-version-mechanism.md))。
 - **switch 按判别标签分派。** 封闭的 union 以 `assertNever` 收尾;可合并扩展的 union 走一个有文档的默认分支。
 - **waterfall(瀑布式事件)的监听器必须调用 `next()`** 才能往下委托;不调用就直接返回会把整条链短路([语义](https://github.com/deepseek-ai/deepseek-harness/blob/master/docs/cordis-primer.md#cordis-waterfall-semantics))。
@@ -141,9 +143,9 @@ pnpm run demo:acp       # ACP 自动化服务端(需要 DEEPSEEK_API_KEY)
 
 一切都在 `strict: true` 加 `noImplicitAny` 下编译;每一个残留的 `any` 都要解释为什么无法收窄。每个模块和导出都有简洁的 JSDoc 说明其不显然的契约;函数型的导出包含 `@param`/`@returns`,由 `verify-export-jsdoc` 强制。继承声明的成员、插件协议的槽位以及构造函数,把它们的文档留在声明它们的那个 Service Definition、协议或类上。
 
-注释与文档陈述完整的契约与上下文,不是推理过程的记录。用直接、具体的词。不要用隐喻。在写下 `contract`、`boundary` 或 `shape` 之前,先问是否有更准确的词能点名这个对象:写 `response fields`、`JSON validation`、`ESM exports`,而不是 `response shape`、`validation boundary`、`module shape`。`contract` 留给前置条件、后置条件、不变量、兼容承诺,以及调用方、被调方、实现者、provider、生产者或消费者所依赖的其他义务。`boundary` 留给字面意义上的进程、wire、安全、事务或生命周期边界。不要叙述控制流或测试,不要保留评审历史,不要复述代码。保住行为、失败、时序、所有权与安全使用这些事实;理由用链接。判断依据用 [dsh-prose-standard](.agents/skills/dsh-prose-standard/SKILL.md)。把可机检的不变量焊进一个**会被执行的**顶层门禁,并且证明每条改动过的验收路径确实会拒绝一个非法输入。用窄而有理由的例外,而不是全局关掉一条规则。
+注释与文档陈述完整的契约与上下文,不是推理过程的记录。用直接、具体的词。不要用隐喻。在写下 `contract`、`boundary` 或 `shape` 之前,先问是否有更准确的词能点名这个对象:写 `response fields`、`JSON validation`、`ESM exports`,而不是 `response shape`、`validation boundary`、`module shape`。`contract` 留给前置条件、后置条件、不变量、兼容承诺,以及调用方、被调方、实现者、provider、生产者或消费者所依赖的其他义务。`boundary` 留给字面意义上的进程、wire、安全、事务或生命周期边界。不要叙述控制流或测试,不要保留评审历史,不要复述代码。保住行为、失败、时序、所有权与安全使用这些事实;理由用链接。判断依据用 [dsh-prose-standard](.agents/skills/dsh-prose-standard/SKILL.zh.md)。把可机检的不变量焊进一个**会被执行的**顶层门禁,并且证明每条改动过的验收路径确实会拒绝一个非法输入。用窄而有理由的例外,而不是全局关掉一条规则。
 
-文档伴随每一次代码改动:受影响的 README 与 JSDoc 契约一起更新。日常的双语工作遵循 [docs/AGENTS.md](docs/AGENTS.md);只有用户显式调用才可以运行 `dsh-translate-docs`。当前状态的行文、一段一物理行、一个事实一个家,以及字数预算,都在那里。
+文档伴随每一次代码改动:受影响的 README 与 JSDoc 契约一起更新。日常的双语工作遵循 [docs/AGENTS.md](docs/AGENTS.zh.md);只有用户显式调用才可以运行 `dsh-translate-docs`。当前状态的行文、一段一物理行、一个事实一个家,以及字数预算,都在那里。
 
 ## 修改这份说明
 

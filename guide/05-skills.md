@@ -10,7 +10,7 @@
 
 写成 skill 文件放进 `.agents/skills/`,每份带触发条件,AI 遇到匹配的场景自己加载。
 
-`SKILL.md` 开头的 frontmatter 决定它什么时候被用上,比如 [dsh-code-review](../.agents/skills/dsh-code-review/SKILL.md) 的:
+`SKILL.md` 开头的 frontmatter 决定它什么时候被用上,比如 [dsh-code-review](../.agents/skills/dsh-code-review/SKILL.zh.md) 的:
 
 ```yaml
 description: Use when reviewing a pull request in the deepseek-harness repo — orients
@@ -32,17 +32,17 @@ description: Use when reviewing a pull request in the deepseek-harness repo — 
 
 | Skill | 焊死的那条判断 | 迁移 |
 |---|---|---|
-| [dsh-trim-cot-leakage](../.agents/skills/dsh-trim-cot-leakage/SKILL.md) | 只看 HEAD 的读者能否验证每个论断,不能就重写;附九条「什么不算泄漏」 | 直接可用 |
-| [dsh-prose-standard](../.agents/skills/dsh-prose-standard/SKILL.md) | 改之前先枚举这段的每条命题,逐条都留住才算改好;字数变少不算改进 | 直接可用 |
-| [dsh-code-review](../.agents/skills/dsh-code-review/SKILL.md) | 指南不是清单,一条有据的 blocker 胜过一堆 nits;收到审查逐条技术核实、可反驳,不要表演性同意 | 直接可用 |
-| [dsh-find-simplifications](../.agents/skills/dsh-find-simplifications/SKILL.md) | 动手删之前先把消费者分成生产、非生产、模糊三类看真实调用点;双适配器和双后端是有意为之 | 直接可用 |
-| [dsh-merging-stacked-prs](../.agents/skills/dsh-merging-stacked-prs/SKILL.md) | 栈语义交给 GitHub,不手工逐个 merge 加 retarget 去模拟;没有官方支持就停 | 直接可用 |
-| [record-browser-gif](../.agents/skills/record-browser-gif/SKILL.md) | GUI 改动附的 GIF 必须录自真实服务和模型流 | 直接可用 |
-| [dsh-archive-agent-notes](../.agents/skills/dsh-archive-agent-notes/SKILL.md) | 按未来决策价值决定归档,不按字数年龄配额;提案不归档,过时就否决 | 换命令 |
-| [dsh-pre-push-checks](../.agents/skills/dsh-pre-push-checks/SKILL.md) | 挑恰好覆盖改动的检查;只报告实际跑过的命令 | 换命令 |
-| [dsh-doc-standards](../.agents/skills/dsh-doc-standards/SKILL.md) | 一个事实一个家;字数超了先搬走、再压缩,最后才抬上限 | 换分层 |
-| [dsh-translate-docs](../.agents/skills/dsh-translate-docs/SKILL.md) | 双语对没有永久主语言,哪边先改哪边就是这次的作者侧 | 仅参考 |
-| [dsh-doc-site-sync](../.agents/skills/dsh-doc-site-sync/SKILL.md) | 站点是文档的投影,不是第二份真相 | 仅参考 |
+| [dsh-trim-cot-leakage](../.agents/skills/dsh-trim-cot-leakage/SKILL.zh.md) | 只看 HEAD 的读者能否验证每个论断,不能就重写;附九条「什么不算泄漏」 | 直接可用 |
+| [dsh-prose-standard](../.agents/skills/dsh-prose-standard/SKILL.zh.md) | 改之前先枚举这段的每条命题,逐条都留住才算改好;字数变少不算改进 | 直接可用 |
+| [dsh-code-review](../.agents/skills/dsh-code-review/SKILL.zh.md) | 指南不是清单,一条有据的 blocker 胜过一堆 nits;收到审查逐条技术核实、可反驳,不要表演性同意 | 直接可用 |
+| [dsh-find-simplifications](../.agents/skills/dsh-find-simplifications/SKILL.zh.md) | 动手删之前先把消费者分成生产、非生产、模糊三类看真实调用点;双适配器和双后端是有意为之 | 直接可用 |
+| [dsh-merging-stacked-prs](../.agents/skills/dsh-merging-stacked-prs/SKILL.zh.md) | 栈语义交给 GitHub,不手工逐个 merge 加 retarget 去模拟;没有官方支持就停 | 直接可用 |
+| [record-browser-gif](../.agents/skills/record-browser-gif/SKILL.zh.md) | GUI 改动附的 GIF 必须录自真实服务和模型流 | 直接可用 |
+| [dsh-archive-agent-notes](../.agents/skills/dsh-archive-agent-notes/SKILL.zh.md) | 按未来决策价值决定归档,不按字数年龄配额;提案不归档,过时就否决 | 换命令 |
+| [dsh-pre-push-checks](../.agents/skills/dsh-pre-push-checks/SKILL.zh.md) | 挑恰好覆盖改动的检查;只报告实际跑过的命令 | 换命令 |
+| [dsh-doc-standards](../.agents/skills/dsh-doc-standards/SKILL.zh.md) | 一个事实一个家;字数超了先搬走、再压缩,最后才抬上限 | 换分层 |
+| [dsh-translate-docs](../.agents/skills/dsh-translate-docs/SKILL.zh.md) | 双语对没有永久主语言,哪边先改哪边就是这次的作者侧 | 仅参考 |
+| [dsh-doc-site-sync](../.agents/skills/dsh-doc-site-sync/SKILL.zh.md) | 站点是文档的投影,不是第二份真相 | 仅参考 |
 
 最后两个强依赖 dsh 的双语配对机制和站点结构,当模式看就好。
 
@@ -95,7 +95,7 @@ flowchart LR
 
 **好在哪。** 一个热心的 AI 接到「清理文档」这种任务,最容易犯的错就是删得太多:issue 号、豁免理由、实测数据一起清掉,结果文档变干净了、信息少了,而且没人发现。判定告诉它删什么,护栏告诉它哪些是承重的。**只有判定的规范是危险的规范。**
 
-完整的八类修法、九条保留规则、五步工作流,以及大量正反例校准:[SKILL.md](../.agents/skills/dsh-trim-cot-leakage/SKILL.md)、[examples.md](../.agents/skills/dsh-trim-cot-leakage/references/examples.md)、[recall-batteries.md](../.agents/skills/dsh-trim-cot-leakage/references/recall-batteries.md)。
+完整的八类修法、九条保留规则、五步工作流,以及大量正反例校准:[SKILL.md](../.agents/skills/dsh-trim-cot-leakage/SKILL.zh.md)、[examples.md](../.agents/skills/dsh-trim-cot-leakage/references/examples.zh.md)、[recall-batteries.md](../.agents/skills/dsh-trim-cot-leakage/references/recall-batteries.zh.md)。
 
 ## 再看一个:dsh-prose-standard 的「完整命题」
 
@@ -121,19 +121,19 @@ flowchart LR
 
 dsh 的十一个 description 有统一的写法:**不描述这个 skill 是什么,只描述什么时候该用它。** 全部以 `Use when` 开头,后面把触发场景尽量摊开。
 
-摊开到什么程度?[dsh-trim-cot-leakage](../.agents/skills/dsh-trim-cot-leakage/SKILL.md) 把要抓的症状短语直接列进了 description:
+摊开到什么程度?[dsh-trim-cot-leakage](../.agents/skills/dsh-trim-cot-leakage/SKILL.zh.md) 把要抓的症状短语直接列进了 description:
 
 > dead design-session citations such as (decision N), audit item codes, or §N of uncommitted drafts; change narration such as "used to", "no longer", "this cut"; stack or review vantage …
 
 AI 读到一段带 `used to` 的注释,不需要先理解「什么是思维链泄漏」这个抽象概念,字面匹配上就知道该加载什么。
 
-[dsh-doc-standards](../.agents/skills/dsh-doc-standards/SKILL.md) 更直接,把用户可能说的原话都抄进去了:
+[dsh-doc-standards](../.agents/skills/dsh-doc-standards/SKILL.zh.md) 更直接,把用户可能说的原话都抄进去了:
 
 > … or requests like "improve the docs", "audit the docs", "where should this be documented", or "this doc is too long".
 
 连「这文档太长了」这种大白话都在里面。写 description 的时候,把你和 AI 平时怎么开口说这件事的原话放进去,比归纳成一个精确的术语有用得多。
 
-还有一类是反过来的:**明确不许自动加载。** [dsh-translate-docs](../.agents/skills/dsh-translate-docs/SKILL.md) 的 frontmatter 是:
+还有一类是反过来的:**明确不许自动加载。** [dsh-translate-docs](../.agents/skills/dsh-translate-docs/SKILL.zh.md) 的 frontmatter 是:
 
 ```yaml
 disable-model-invocation: true
@@ -148,7 +148,7 @@ dsh 的十一个 skill 是 45 到 146 行,中位数 81。不是刻意压的,是�
 
 **这条约束是有原因的。** 规则在 skill 里被重述一遍,就出现了第二份真相,改规则的人不会想到还要来同步这里,于是 skill 里那份慢慢变成过期的规则,而 AI 读到的是过期那份。宁可让它多读一个文件。
 
-真的写不下了,做法是拆 `references/`。[dsh-trim-cot-leakage](../.agents/skills/dsh-trim-cot-leakage/SKILL.md) 的 `SKILL.md` 只有 45 行,大量正反例校准放在 `references/examples.md` 和 `references/recall-batteries.md`,需要时才读。判定放主文件,校准放副文件。
+真的写不下了,做法是拆 `references/`。[dsh-trim-cot-leakage](../.agents/skills/dsh-trim-cot-leakage/SKILL.zh.md) 的 `SKILL.md` 只有 45 行,大量正反例校准放在 `references/examples.md` 和 `references/recall-batteries.md`,需要时才读。判定放主文件,校准放副文件。
 
 ## 搬到自己项目
 

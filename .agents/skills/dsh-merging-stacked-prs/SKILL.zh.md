@@ -1,6 +1,8 @@
 # Landing an official GitHub PR stack(中文对照)
 
-> 这是 [SKILL.md](SKILL.md) 的中文对照,供阅读方便。**英文原文是权威版本**,执行规则时以原文为准。
+[English 原文](SKILL.md) | 中文
+
+> 这是英文原文的中文对照,供阅读方便。**英文原文是权威版本**,执行规则时以原文为准。
 
 本 skill 触发场景:着一栈相互依赖的 GitHub PR(A ← B ← C,每个都基于它下面那个之上)上 master,合并一个 base 是另一个开放 PR 分支的 PR,或任何请求里提到 "stacked PRs"(栈式 PR)、"PR stack"、dependent PRs(相互依赖的 PR),或依次合并若干相关 PR 时。要求:上 master 前,仓库内每一组相互依赖链都必须用 GitHub 官方的 stacked-PR(栈式 PR)特性,让 GitHub 掌管全栈规则、CI、顺序、retarget(重定目标)与合并状态。
 

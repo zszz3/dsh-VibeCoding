@@ -15,7 +15,7 @@
 
 ### 第 1 步:写 AGENTS.md
 
-**做。** 仓库根建 `AGENTS.md`,`ln -s AGENTS.md CLAUDE.md`。先只写你最反复交代的五六条,每条一两行加一个链接。可以照 [dsh 那份](../AGENTS.md)的结构:定位、命令表、约定。
+**做。** 仓库根建 `AGENTS.md`,`ln -s AGENTS.md CLAUDE.md`。先只写你最反复交代的五六条,每条一两行加一个链接。可以照 [dsh 那份](../AGENTS.zh.md)的结构:定位、命令表、约定。
 
 **验收。** 新开一个 AI session,不做任何提示,问它「本项目的提交规范是什么」,它答得对。
 

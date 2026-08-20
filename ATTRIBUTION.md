@@ -35,12 +35,13 @@ MIT 允许再分发和改编,要求保留版权与许可声明,本仓库的 `LIC
 
 没收的留在上游,`README.md` 与各文件里的链接会指过去。上游的中文对照页(`.zh.md`)与配对边车(`.i18n.yaml`)没有收录,那套机制依赖上游的 Git 合并驱动和门禁脚本。
 
-## 唯一改动过的地方:跨仓库链接
+## 改动过的地方
 
-- 这里收录了的目标,链接保持原样(643 条本地链接)。
-- 没收录的目标,改成指向上游 GitHub 的绝对链接,点进去能看到原始内容,不会碰到断链。
+原件的正文一字未改,只动了两处:
 
-行内代码里形如 `` `[English](foo.md)` `` 的示例不是链接,没动过。
+**一、跨仓库链接。** 这里收录了的目标,链接保持原样(647 条本地链接);没收录的目标,改成指向上游 GitHub 的绝对链接,点进去能看到原始内容,不会碰到断链。行内代码里形如 `` `[English](foo.md)` `` 的示例不是链接,没动过。
+
+**二、语言切换行。** 有中文对照的文件,在 H1 下面加了一行 `English | [中文](…)`;对照页那侧对称地写 `[English 原文](…) | 中文`。这是上游自己的写法(`.agents/notes/README.md` 就是这样),目的是两边都能一眼看到另一版在哪。
 
 ## 本仓库自己写的
 
@@ -54,20 +55,22 @@ MIT 允许再分发和改编,要求保留版权与许可声明,本仓库的 `LIC
 
 上游给 693 篇 Agent Note 和 18 篇 docs 都做了 `.zh.md` 中文对照,但**六份 `AGENTS.md` 与 11 个 skill 是英文独有的**(它们是 agent 指令,不在上游的双语范围内)。
 
-本仓库为这 17 份补了中文对照,文件名沿用上游的 `.zh.md` 约定,与英文原文同目录:
+本仓库为这 20 份补了中文对照,文件名沿用上游的 `.zh.md` 约定,与英文原文同目录:
 
 | 英文原文 | 中文对照 |
 |---|---|
 | `AGENTS.md`、`docs/AGENTS.md`、`packages/AGENTS.md`、`scripts/AGENTS.md`、`.github/AGENTS.md`、`.agents/notes/AGENTS.md` | 各自的 `AGENTS.zh.md` |
 | `.agents/skills/*/SKILL.md`(11 个) | 各自的 `SKILL.zh.md` |
+| `dsh-trim-cot-leakage/references/{examples,recall-batteries}.md`、`dsh-prose-standard/references/examples.md` | 各自的 `.zh.md` |
 
 翻译遵循的规则:
 
 - **英文原文是权威版本**,每份译文开头都写明这一点;执行规则时以原文为准。
 - 术语按上游[术语表](https://github.com/deepseek-ai/deepseek-harness/blob/master/docs/i18n/terminology.md):`agent`、`skill`、`seam`、`Agent Note`、`worktree`、`waterfall` 等保留英文;`plugin`→插件、`session`→会话、`capability`→能力、`prompt`→提示词、`tool`→工具、`snapshot`→快照。
-- 结构逐节对应,代码/命令/路径/标识符原样保留,链接目标不变。
+- 结构逐节对应,代码/命令/路径/标识符原样保留。
+- 链接指向对照版(如果目标有对照版),这样中文读者点进去不会突然跳回英文;每页顶部都能切回原文。
 - 保住模态词(must→必须、never→绝不),不把「必须」弱化成「应该」。
-- 译文不带 YAML frontmatter,以免被误当成可加载的 skill。
+- 译文不带 YAML frontmatter,以免被误当成可加载的 skill;原文 frontmatter 里的 `description` 在正文第一段交代。
 
 ## 这些文件描述的是 dsh,不是本仓库
 

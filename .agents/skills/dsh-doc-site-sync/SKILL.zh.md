@@ -1,6 +1,8 @@
 # Synchronizing the DeepSeek Harness Documentation Site(中文对照)
 
-> 这是 [SKILL.md](SKILL.md) 的中文对照,供阅读方便。**英文原文是权威版本**,执行规则时以原文为准。
+[English 原文](SKILL.md) | 中文
+
+> 这是英文原文的中文对照,供阅读方便。**英文原文是权威版本**,执行规则时以原文为准。
 
 在发布、更新、移动或删除 DeepSeek Harness 文档站点页面时;编辑 website/docs.ts 映射或导航时;诊断 VitePress 站点上缺失的页面时;修复被投影(projection)的文档链接时;或在修改 website 内容之后运行 docs:dev、docs:check 与 doc-sync 工作流时,使用本 skill。
 
@@ -10,8 +12,8 @@
 
 ## 阅读所属契约
 
-- 阅读 [docs/AGENTS.md](../../../docs/AGENTS.md),并在决定内容归属或修改产品文档 prose 时使用 [dsh-doc-standards](../dsh-doc-standards/SKILL.md)。
-- 对于已编辑的双语源文件,遵循 [docs/AGENTS.md](../../../docs/AGENTS.md#writing-rules) 中的轻量例程路径与[配对契约](https://github.com/deepseek-ai/deepseek-harness/blob/master/docs/i18n/README.md);绝不自动调用扩展翻译 skill。
+- 阅读 [docs/AGENTS.md](../../../docs/AGENTS.zh.md),并在决定内容归属或修改产品文档 prose 时使用 [dsh-doc-standards](../dsh-doc-standards/SKILL.zh.md)。
+- 对于已编辑的双语源文件,遵循 [docs/AGENTS.md](../../../docs/AGENTS.zh.md#writing-rules) 中的轻量例程路径与[配对契约](https://github.com/deepseek-ai/deepseek-harness/blob/master/docs/i18n/README.md);绝不自动调用扩展翻译 skill。
 - 在修改清单之前,先阅读当前的 `DocsPage` 类型与 [website/docs.ts](https://github.com/deepseek-ai/deepseek-harness/blob/master/website/docs.ts) 中的条目;不要依赖记忆中的字段集合。
 - 在添加新的 section、sidebar 集合、locale 或顶级导航项之前,先阅读 [website/.vitepress/config.ts](https://github.com/deepseek-ai/deepseek-harness/blob/master/website/.vitepress/config.ts)。
 
@@ -78,7 +80,7 @@ pnpm run lint
 git diff --check
 ```
 
-推送前使用 [dsh-pre-push-checks](../dsh-pre-push-checks/SKILL.md)。上报被改的规范文件、新增或移除的清单条目、受影响的公共路由,以及实际跑过的检查。
+推送前使用 [dsh-pre-push-checks](../dsh-pre-push-checks/SKILL.zh.md)。上报被改的规范文件、新增或移除的清单条目、受影响的公共路由,以及实际跑过的检查。
 
 ## 部署分开处理
 

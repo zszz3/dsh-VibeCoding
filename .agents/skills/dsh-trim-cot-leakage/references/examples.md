@@ -1,5 +1,7 @@
 # Few-shot leakage examples
 
+English | [中文](examples.zh.md)
+
 Distilled from the 2026-08 repo-wide purge and its review rounds. Use them to identify the governing principle, not as text templates. This file deliberately quotes leaked wording as calibration material — the [recall batteries](recall-batteries.md) exclude the skill's directory, and its wording is not a license elsewhere.
 
 ## Dead citations

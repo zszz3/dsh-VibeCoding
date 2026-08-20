@@ -1,6 +1,8 @@
 # Finding DeepSeek Harness Simplifications(中文对照)
 
-> 这是 [SKILL.md](SKILL.md) 的中文对照,供阅读方便。**英文原文是权威版本**,执行规则时以原文为准。
+[English 原文](SKILL.md) | 中文
+
+> 这是英文原文的中文对照,供阅读方便。**英文原文是权威版本**,执行规则时以原文为准。
 
 本 skill 在 deepseek-harness 仓库中寻找不显然的简化候选、撰写提议中的 Agent Note 或行内 TODO/FIXME/XXX 注释、审计或合并已被取代的 Agent Note、从另一 PR 吸纳有价值的简化思路时触发,尤其适用于已死的、重复的、投机性的、过度设计的、先增后删的,或本可用现成依赖却选择手写的曲面。
 
@@ -79,7 +81,7 @@
 
 当用户要求减少或合并 Agent Note 树时,或当正在实施的简化致使某条所属 note 过期时,审计该树。不要将每次代码简化摸底都扩大成一次仓库范围的 note 审计。
 
-使用 [`dsh-archive-agent-notes`](../dsh-archive-agent-notes/SKILL.md) 进行留存判定与归档操作。未来价值低的已实施 note 以冻结三元组(frozen triplet)形式移入 `archived/{kind}`;提议中的 note 绝不归档;已无法防止某类诱人失误(tempting mistake)的已否决 note 予以删除。在简化当前文案或代码时,不要编辑已归档的 note。
+使用 [`dsh-archive-agent-notes`](../dsh-archive-agent-notes/SKILL.zh.md) 进行留存判定与归档操作。未来价值低的已实施 note 以冻结三元组(frozen triplet)形式移入 `archived/{kind}`;提议中的 note 绝不归档;已无法防止某类诱人失误(tempting mistake)的已否决 note 予以删除。在简化当前文案或代码时,不要编辑已归档的 note。
 
 遵循 [Agent Note 规则](../../notes/README.md#when-to-write-one)中的删除规则;不要在此重复或弱化它。对于每个候选链:
 

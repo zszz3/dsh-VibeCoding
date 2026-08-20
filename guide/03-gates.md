@@ -29,7 +29,7 @@ flowchart LR
 
 越往后越慢也越全。快的挡低级错,慢的挡真问题。
 
-**pre-push 刻意不跑全套。** 根 `AGENTS.md` 里的原话是「Never default to the full suite」,只挑恰好覆盖本次改动的检查,穷尽覆盖和平台矩阵交给 CI。挑选办法固化成了一个 skill:[dsh-pre-push-checks](../.agents/skills/dsh-pre-push-checks/SKILL.md)。
+**pre-push 刻意不跑全套。** 根 `AGENTS.md` 里的原话是「Never default to the full suite」,只挑恰好覆盖本次改动的检查,穷尽覆盖和平台矩阵交给 CI。挑选办法固化成了一个 skill:[dsh-pre-push-checks](../.agents/skills/dsh-pre-push-checks/SKILL.zh.md)。
 
 **好在哪。** 本地全跑一遍要十几分钟,跑三次就没人愿意跑了,然后大家开始 `--no-verify`。把本地那道压到分钟级,它才会真的被执行。这个取舍有记录:[parallel-pre-push-gates](../.agents/notes/implemented/process/2026-07-06-parallel-pre-push-gates.md),里面还记了它为什么接受一个自制调度器而不用现成的任务编排工具。
 
@@ -52,7 +52,7 @@ dsh 的门禁清单和取舍在 [quality-gates](../.agents/notes/implemented/pro
 
 一道从未失败的门禁可能只是个摆设:正则写错、路径不对,或者根本没被任何流程调用。
 
-dsh 的 [dsh-code-review](../.agents/skills/dsh-code-review/SKILL.md) 里把这条写成了审查要求:
+dsh 的 [dsh-code-review](../.agents/skills/dsh-code-review/SKILL.zh.md) 里把这条写成了审查要求:
 
 > A guard only guards if the regression actually fails it. … add an explicit assertion, and prove it: introduce the regression, watch red, revert.
 
@@ -64,7 +64,7 @@ dsh 的 [dsh-code-review](../.agents/skills/dsh-code-review/SKILL.md) 里把这�
 
 这是最隐蔽的一种。AI 很容易写出「看起来限制住了、其实绕得过」的代码:在工具的 JSON schema 里不暴露某个字段,或者在 prompt 里叮嘱模型别那么做。
 
-[packages/AGENTS.md](../packages/AGENTS.md) 里的规则:
+[packages/AGENTS.md](../packages/AGENTS.zh.md) 里的规则:
 
 > **Enforce a decision in the operation that makes it.** Schema omission, prompt filtering, facades, wrappers, and listener order are not enforcement when direct or alternate callers can bypass them; test denial through the executor.
 
@@ -122,7 +122,7 @@ dsh 用 [lefthook](https://github.com/evilmartians/lefthook) 配 git 钩子,整�
 
 **pre-push 只有一条:`pnpm run typecheck`。**
 
-对,就一条。前面说「pre-push 刻意不跑全套」,落到配置里就是这么彻底:自动跑的只有增量类型检查,其余靠 [dsh-pre-push-checks](../.agents/skills/dsh-pre-push-checks/SKILL.md) 按改动面挑。判断力交给 skill,钩子只留那条不管改什么都值得跑的。
+对,就一条。前面说「pre-push 刻意不跑全套」,落到配置里就是这么彻底:自动跑的只有增量类型检查,其余靠 [dsh-pre-push-checks](../.agents/skills/dsh-pre-push-checks/SKILL.zh.md) 按改动面挑。判断力交给 skill,钩子只留那条不管改什么都值得跑的。
 
 还有一处小设计:生成物类的检查,dsh 的做法是**能修就别拒**。
 

@@ -1,12 +1,14 @@
 # Translating DeepSeek-Harness docs(中文对照)
 
-> 这是 [SKILL.md](SKILL.md) 的中文对照,供阅读方便。**英文原文是权威版本**,执行规则时以原文为准。
+[English 原文](SKILL.md) | 中文
 
-本 skill 在你通过名称显式调用 `dsh-translate-docs` 时触发,用于手动执行扩展的 DeepSeek Harness 双语文档工作流,包括生成的简报、委托式散文翻译、整文档翻译,以及限定范围的 pairing(配对)验证。普通文档翻译遵循 [docs/AGENTS.md](../../../docs/AGENTS.md) 中的一次性单遍规则,不要选择或加载本 skill。
+> 这是英文原文的中文对照,供阅读方便。**英文原文是权威版本**,执行规则时以原文为准。
+
+本 skill 在你通过名称显式调用 `dsh-translate-docs` 时触发,用于手动执行扩展的 DeepSeek Harness 双语文档工作流,包括生成的简报、委托式散文翻译、整文档翻译,以及限定范围的 pairing(配对)验证。普通文档翻译遵循 [docs/AGENTS.md](../../../docs/AGENTS.zh.md) 中的一次性单遍规则,不要选择或加载本 skill。
 
 ## Invocation boundary(调用边界)
 
-只有用户通过名称显式调用 `dsh-translate-docs` 时,才运行此扩展工作流。绝不因普通文档工作、从别的 skill,或推断出的翻译需求而去选择或加载它;常规翻译遵循 [docs/AGENTS.md](../../../docs/AGENTS.md) 中的一次性单遍规则。
+只有用户通过名称显式调用 `dsh-translate-docs` 时,才运行此扩展工作流。绝不因普通文档工作、从别的 skill,或推断出的翻译需求而去选择或加载它;常规翻译遵循 [docs/AGENTS.md](../../../docs/AGENTS.zh.md) 中的一次性单遍规则。
 
 ## What this skill is(本 skill 是什么)
 
@@ -40,7 +42,7 @@
 - **[docs/i18n/translation-rules.md](https://github.com/deepseek-ai/deepseek-harness/blob/master/docs/i18n/translation-rules.md)**——怎么翻译:忠实度、结构保留、术语规范、排版(MUST/SHOULD 层级)。
 - **[docs/i18n/terminology.md](https://github.com/deepseek-ai/deepseek-harness/blob/master/docs/i18n/terminology.md)**——术语表,双向绑定。译之前就读,不要等某个术语拿不准了才翻;你没留意到的那些术语,恰恰是会漂走的。
 - **[docs/i18n/translation-prompt.md](https://github.com/deepseek-ai/deepseek-harness/blob/master/docs/i18n/translation-prompt.md)**——自动化流水线校准过的、供机器消费的模板。用本 skill 的 agent 不渲染它;术语表是自动化渲染器唯一注入的仓库文件,而本 skill 与 translation-rules.md 对 agent 撰写的翻译依然具约束力。
-- **[dsh-prose-standard](../dsh-prose-standard/SKILL.md)**——必达的散文覆盖与编辑判断。把它运用到两边,不增不减源命题。
+- **[dsh-prose-standard](../dsh-prose-standard/SKILL.zh.md)**——必达的散文覆盖与编辑判断。把它运用到两边,不增不减源命题。
 
 ### Translate(翻译)
 
@@ -62,9 +64,9 @@
 1. 切换行:中文文件 H1 之后立刻写 `[English](foo.md) | 中文`,英文文件 H1 之后写 `English | [中文](foo.zh.md)`——新 pair 两边都加,但生成器拥有的英文源逐字节保留生成器输出、omit 切换行,而中文 counterpart 仍链回它。
 2. 记录一致性:`pnpm run verify-translation-pairing --write <pair>` 重算并把双方完整 blob hash 记入 `foo.i18n.yaml`。PR 里的 yaml diff 就是那句可审阅的「我确认这两边说的是同一件事」——只有你真的确认之后再跑它。
 3. 普通文档不需要清册条目:每一个在作用域的源都需要一对。只在所属策略书面证明属于真正的生成式、教学式、或双语构建的排除时,才改 [scripts/translation-pairing.manifest.json](https://github.com/deepseek-ai/deepseek-harness/blob/master/scripts/translation-pairing.manifest.json)。
-4. PR 之前:被碰的 pair 在限定范围检查下是绿的;`pnpm run doc-sync`(含全语料库配对检查与 `verify-md-wrap`/`verify-md-links`)在 PR 层级按[dsh-pre-push-checks](../dsh-pre-push-checks/SKILL.md)跑一次,不塞进每次翻译任务。
+4. PR 之前:被碰的 pair 在限定范围检查下是绿的;`pnpm run doc-sync`(含全语料库配对检查与 `verify-md-wrap`/`verify-md-links`)在 PR 层级按[dsh-pre-push-checks](../dsh-pre-push-checks/SKILL.zh.md)跑一次,不塞进每次翻译任务。
 5. 保持 PR 可审阅:说明哪些 pair 是新的、哪些是最小更新,并突出列出「待定术语」。
 
 ## How to respond to translation review(如何回应翻译 Review)
 
-按[code review 汇报指引](../dsh-code-review/SKILL.md#reporting-findings)处理:就事论事评估每条评论;对术语评论,记住术语表就是契约——把某次 reviewer 的译法决定应用到 [terminology.md](https://github.com/deepseek-ai/deepseek-harness/blob/master/docs/i18n/terminology.md),而不是只改一个文件。
+按[code review 汇报指引](../dsh-code-review/SKILL.zh.md#reporting-findings)处理:就事论事评估每条评论;对术语评论,记住术语表就是契约——把某次 reviewer 的译法决定应用到 [terminology.md](https://github.com/deepseek-ai/deepseek-harness/blob/master/docs/i18n/terminology.md),而不是只改一个文件。

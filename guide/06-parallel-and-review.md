@@ -46,7 +46,7 @@ xtr/node-pty-1.2-beta
 
 改动 B 依赖改动 A 时,B 的 base 指向 A 的分支。这种栈的合并顺序、CI、重定基、合并状态很容易手工搞错。
 
-[dsh-merging-stacked-prs](../.agents/skills/dsh-merging-stacked-prs/SKILL.md) 的规定很硬:
+[dsh-merging-stacked-prs](../.agents/skills/dsh-merging-stacked-prs/SKILL.zh.md) 的规定很硬:
 
 > Land dependent PRs through GitHub's native stack object and `gh stack merge`. Do not reproduce stack semantics by merging and retargeting individual PRs.
 
@@ -60,7 +60,7 @@ xtr/node-pty-1.2-beta
 
 ### 三、AI 审 AI
 
-审查者 AI 加载 [dsh-code-review](../.agents/skills/dsh-code-review/SKILL.md),拿整套仓库标准来审。这个 skill 的基调第一句就定了:
+审查者 AI 加载 [dsh-code-review](../.agents/skills/dsh-code-review/SKILL.zh.md),拿整套仓库标准来审。这个 skill 的基调第一句就定了:
 
 > **This skill is guidance, not a complete checklist.** … a short review with one substantiated blocker is better than a list of nits.
 

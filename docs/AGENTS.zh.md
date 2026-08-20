@@ -1,8 +1,10 @@
 # AGENTS.md — The documentation standard(中文对照)
 
-> 这是 [docs/AGENTS.md](AGENTS.md) 的中文对照,供阅读方便。**英文原文是权威版本**,执行规则时以原文为准。术语译法参照 dsh 自己的约定:`agent`、`skill`、`seam`、`Agent Note` 等保留英文。
+[English 原文](AGENTS.md) | 中文
 
-本文件定义文档结构、Markdown 分层、写作规则以及 `verify-doc-budgets` 的字数上限。放置位置与校验用 [dsh-doc-standards](../.agents/skills/dsh-doc-standards/SKILL.md),必需覆盖与编辑判断用 [dsh-prose-standard](../.agents/skills/dsh-prose-standard/SKILL.md);理由归 [doc-tiers 这篇 Agent Note](../.agents/notes/implemented/process/2026-07-04-doc-tiers-and-budgets.md) 所有。
+> 这是英文原文的中文对照,供阅读方便。**英文原文是权威版本**,执行规则时以原文为准。术语译法参照 dsh 自己的约定:`agent`、`skill`、`seam`、`Agent Note` 等保留英文。
+
+本文件定义文档结构、Markdown 分层、写作规则以及 `verify-doc-budgets` 的字数上限。放置位置与校验用 [dsh-doc-standards](../.agents/skills/dsh-doc-standards/SKILL.zh.md),必需覆盖与编辑判断用 [dsh-prose-standard](../.agents/skills/dsh-prose-standard/SKILL.zh.md);理由归 [doc-tiers 这篇 Agent Note](../.agents/notes/implemented/process/2026-07-04-doc-tiers-and-budgets.md) 所有。
 
 ## 文档结构
 
@@ -43,7 +45,7 @@
 - **围栏的 `ts` 代码块必须能编译**(`doc-typecheck`);粘贴的类型声明连同它原本的 JSDoc 用 ` ```ts type-equiv `,而去掉方法体的公开类声明用 ` ```ts public-api `;两者都要登记进 manifest,这样谁都不会漂移([机制](development.md#documenting-types-verbatim-ts-type-equiv))。
 - **在重塑一个已记录类型的同一次改动里,更新拥有它的那个 [subsystems 页面](https://github.com/deepseek-ai/deepseek-harness/blob/master/docs/subsystems/README.md)。** `verify-type-equiv` 抓的是漂移的粘贴,不是从未被记录过的新类型;一个类型记录在声明它的那个包组的页面上([页面归属](../.agents/notes/implemented/process/2026-08-03-package-anchored-subsystem-pages.md))。
 - **双语对照一起更新**:由[术语表](https://github.com/deepseek-ai/deepseek-harness/blob/master/docs/i18n/terminology.md)指导,活跃 agent 的单趟工作会重新摆放首现标注、保留未改动的行文,并重新记录配对;`dsh-translate-docs` 仍然只由用户显式调用([契约](https://github.com/deepseek-ai/deepseek-harness/blob/master/docs/i18n/README.md))。
-- **注释与 JSDoc 陈述完整的契约,不是推理过程的记录。** 保住行为、失败、时序、所有权、模态、例外、后果以及不显然的定位信息;删掉叙述、测试走查、评审分析和对代码的复述。保留本地的契约,并链到它的理由。细则见 [dsh-prose-standard](../.agents/skills/dsh-prose-standard/SKILL.md)。
+- **注释与 JSDoc 陈述完整的契约,不是推理过程的记录。** 保住行为、失败、时序、所有权、模态、例外、后果以及不显然的定位信息;删掉叙述、测试走查、评审分析和对代码的复述。保留本地的契约,并链到它的理由。细则见 [dsh-prose-standard](../.agents/skills/dsh-prose-standard/SKILL.zh.md)。
 - 写得直接:点名行为主体与事实([决策](../.agents/notes/implemented/process/2026-08-09-concrete-prose-names-actors-and-recorded-facts.md))。`seam` 一词只留给它定义的那个能力。点名确切的检查、类型、API、操作或行为,而不是用「gate」「vocabulary」「surface」这类隐喻。
 
 ## 字数预算
@@ -60,7 +62,7 @@
 
 ## 注水清单
 
-在任何文档里搜查这些;[dsh-doc-standards](../.agents/skills/dsh-doc-standards/SKILL.md) 会把这份清单当作一次审计来跑:
+在任何文档里搜查这些;[dsh-doc-standards](../.agents/skills/dsh-doc-standards/SKILL.zh.md) 会把这份清单当作一次审计来跑:
 
 - 同一条规则出现在不止一个家里。用一个有特征的短语 grep 一下;保留一个家,其余改成链接。
 - 叙述式的历史或战争故事:「以前」「现在」「不再」「过去是」「改名为」「被移动到」、PR 或 commit。陈述当前的事实;需要时链一篇 Agent Note 或事故复盘。

@@ -1,10 +1,12 @@
 # Trimming Chain-of-Thought Leakage(中文对照)
 
-> 这是 [SKILL.md](SKILL.md) 的中文对照,供阅读方便。**英文原文是权威版本**,执行规则时以原文为准。
+[English 原文](SKILL.md) | 中文
+
+> 这是英文原文的中文对照,供阅读方便。**英文原文是权威版本**,执行规则时以原文为准。
 >
 > 触发场景:审计或修复那些读起来像泄露出来的推理草稿的 prose —— 已经失效的设计会话引用(比如 `(decision N)`、审计项代号、未提交草稿的 §N);变更叙述(`used to`、`no longer`、`this cut`);栈或评审视角(「这个栈里后面的 PR」「评审时被否」);面向评审者的自辩;控制流叙述;或者带对冲的计划残留 —— 无论它们出现在注释、JSDoc、文档还是 Agent Note 里。
 
-思维链泄漏,指的是视角落在「写作时那次会话」而不是仓库本身的 prose:它引用只有那次会话能看到的产物、叙述变更而不是状态,或者在跟一个已经离场的评审者争论。当一段话带有事实性子句时,修法绝不是只做删除 —— 要把每条事实重述成能在 HEAD 上独立成立,然后删掉它周围的草稿叙述;一段话若一条事实都不带(比如一个审计代号、一段控制流叙述),就直接整段删掉。**必需的背景知识:** 本 skill 所应用的「完整命题」规则归 [dsh-prose-standard](../dsh-prose-standard/SKILL.md) 所有;引用规则的理由归[「已提交产物引用」那篇记录](../../notes/implemented/process/2026-08-09-committed-artifact-citations.md)所有。它是指南,不是脚本。
+思维链泄漏,指的是视角落在「写作时那次会话」而不是仓库本身的 prose:它引用只有那次会话能看到的产物、叙述变更而不是状态,或者在跟一个已经离场的评审者争论。当一段话带有事实性子句时,修法绝不是只做删除 —— 要把每条事实重述成能在 HEAD 上独立成立,然后删掉它周围的草稿叙述;一段话若一条事实都不带(比如一个审计代号、一段控制流叙述),就直接整段删掉。**必需的背景知识:** 本 skill 所应用的「完整命题」规则归 [dsh-prose-standard](../dsh-prose-standard/SKILL.zh.md) 所有;引用规则的理由归[「已提交产物引用」那篇记录](../../notes/implemented/process/2026-08-09-committed-artifact-citations.md)所有。它是指南,不是脚本。
 
 ## 唯一的那道测试
 
@@ -23,10 +25,10 @@
 
 ## 什么*不算*泄漏
 
-没有辅助的引用检查会在两个方向上都出错:既删掉了持久有效的引用,又留下了已经失效的。照下面这些「保留规则」原样执行;[examples](references/examples.md) 对每一条给出校准:
+没有辅助的引用检查会在两个方向上都出错:既删掉了持久有效的引用,又留下了已经失效的。照下面这些「保留规则」原样执行;[examples](references/examples.zh.md) 对每一条给出校准:
 
 - **issue 引用** —— `#1470`、`TODO(name):`、「issue #N 负责后续」在 HEAD 就能解析;在任何表面上都保留,包括 README。不要把它们挪进 Agent Note。
-- **Agent Note 与事故复盘里对已合并 PR 和 issue 的引用** —— 按[文档标准](../../../docs/AGENTS.md)对变更故事的归位规则,这是被认可的证据。
+- **Agent Note 与事故复盘里对已合并 PR 和 issue 的引用** —— 按[文档标准](../../../docs/AGENTS.zh.md)对变更故事的归位规则,这是被认可的证据。
 - **抑制项的理由** —— `oxlint-disable … -- reason`、coverage-ignore 的理由、空 catch 的解释,都是必需的 prose;理由写错了要改,绝不删掉它。
 - **反事实-现在时的回归钉子** —— 「没有 X,就会发生 Y」「一个天真的 X 会……」。
 - **实测得出的边界** —— 用来标定一个常量的「(实测:512 层嵌套 ≈ 0.15s)」;「实测」这个表明来源的词是承重的。
@@ -37,8 +39,8 @@
 
 ## 工作流
 
-1. 范围与排除项按 [dsh-prose-standard](../dsh-prose-standard/SKILL.md):必须有一个显式的范围;绝不碰 `vendor/`、`.agents/notes/archived/`,以及录制下来的 fixture 与快照 —— 录制的模型输出和封存的历史保留它们原本的口吻。
-2. 先做只读审计:跑一遍[召回探针](references/recall-batteries.md)(带 `--hidden`,这样 `.agents/` 也会被搜到),然后对每个命中做语义判断。这些探针只是探针,不是定义 —— 最初那次清理的每一轮评审都发现了探针漏掉的情况,所以也要在不拿任何模式的情况下,通读范围内最密的 prose(模块 JSDoc、README、Agent Note)。
-3. 按表面「先修所有者」:生成的目录 → 先修源码里的 JSDoc 或生成器模板,再重新生成;类型等价围栏 → 先修源码的 JSDoc,再把两个双语页面重新粘贴一遍(`verify-type-equiv` 钉住它们);双语对照 → 更新对照页并按 [dsh-translate-docs](../dsh-translate-docs/SKILL.md) 重新记录;模型可见的字符串 → 措辞就是行为,所以要标记成一次有快照背书的改动,而不是悄悄改词。
-4. 在删掉任何东西之前,先枚举这段话的各条命题(见 prose-standard),并检查[矫枉过正的陷阱](references/examples.md#overcorrection-traps):把一项义务改成了背书、把一个假设升格成已发布的特性、删掉了一条真事实,或者丢掉了来源。
+1. 范围与排除项按 [dsh-prose-standard](../dsh-prose-standard/SKILL.zh.md):必须有一个显式的范围;绝不碰 `vendor/`、`.agents/notes/archived/`,以及录制下来的 fixture 与快照 —— 录制的模型输出和封存的历史保留它们原本的口吻。
+2. 先做只读审计:跑一遍[召回探针](references/recall-batteries.zh.md)(带 `--hidden`,这样 `.agents/` 也会被搜到),然后对每个命中做语义判断。这些探针只是探针,不是定义 —— 最初那次清理的每一轮评审都发现了探针漏掉的情况,所以也要在不拿任何模式的情况下,通读范围内最密的 prose(模块 JSDoc、README、Agent Note)。
+3. 按表面「先修所有者」:生成的目录 → 先修源码里的 JSDoc 或生成器模板,再重新生成;类型等价围栏 → 先修源码的 JSDoc,再把两个双语页面重新粘贴一遍(`verify-type-equiv` 钉住它们);双语对照 → 更新对照页并按 [dsh-translate-docs](../dsh-translate-docs/SKILL.zh.md) 重新记录;模型可见的字符串 → 措辞就是行为,所以要标记成一次有快照背书的改动,而不是悄悄改词。
+4. 在删掉任何东西之前,先枚举这段话的各条命题(见 prose-standard),并检查[矫枉过正的陷阱](references/examples.zh.md#overcorrection-traps):把一项义务改成了背书、把一个假设升格成已发布的特性、删掉了一条真事实,或者丢掉了来源。
 5. 验证:重跑那些探针,期望只剩下被认可的保留项、本 skill 自己的目录,以及拥有该决策的那篇记录所引用的证据;确认每一个残留的引用都能在 HEAD 上解析;对改动过的表面跑门禁(文档跑 `doc-sync`、`verify-type-equiv`、`verify-translation-pairing`)。
