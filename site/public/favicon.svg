@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32">
+  <rect width="32" height="32" rx="7" fill="#42545c"/>
+  <!-- 三条规则线,最后一条被勾选:规则 + 门禁 -->
+  <rect x="8" y="9" width="12" height="2.6" rx="1.3" fill="#e8edf0"/>
+  <rect x="8" y="14.7" width="16" height="2.6" rx="1.3" fill="#e8edf0"/>
+  <rect x="8" y="20.4" width="7" height="2.6" rx="1.3" fill="#8fb3a0"/>
+  <path d="M17.6 22.1l2.2 2.2 4.4-4.6" fill="none" stroke="#8fb3a0" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/>
+</svg>
