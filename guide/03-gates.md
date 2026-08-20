@@ -84,6 +84,52 @@ dsh 要求 `packages/*/src` **逐文件 100%** 覆盖率,但配套的态度写�
 
 **好在哪。** 同一道门禁被用来做两件事:补该补的测试,删该删的代码。而且它自己写明了不能证明什么,所以不会有人拿「覆盖率 100%」来说明功能是对的。
 
+## 一道门禁具体长什么样
+
+拿 [verify-agent-note-format.ts](https://github.com/deepseek-ai/deepseek-harness/blob/master/scripts/verify-agent-note-format.ts) 看,它管的正好是[第二篇](02-agent-notes.md)那套格式。不到一百行,里面有六处写法可以直接抄。
+
+**开头先说自己不管什么。**
+
+> Enforce Agent Note headers, lifecycle-specific sections, alternatives, and retired marker rules. Classification and filenames belong to the sibling tree gate; translation structure belongs to the pairing gate.
+
+分类和文件名归旁边那道,翻译结构归配对那道。一句话把职责边界划完。门禁多起来之后最常见的病是三道检查里有两道半在做同一件事,而某个角落谁都没管;每道都写清「不管什么」,重叠和空隙在读的时候就能发现。
+
+**规则常量提到文件最前面,各带一行说明。** 状态行的语法、每种生命周期的必填标题、implemented 里被禁的标题,都是顶部的命名常量。改规则的人不用读逻辑,改常量就行;读规则的人也不用把正则从 `if` 里挖出来。
+
+**收集全部错误再一次性报,不是撞见第一个就退出。** 这条对 AI 特别重要——它会照着报错一条条改,你一次只给一条,它就得跑五轮。
+
+**报错里带三样东西:哪个文件、违反了哪条、规则原文在哪。** 比如缺备选方案那条的报错,末尾直接写着 `see .agents/notes/README.md § The file format`。让 AI 自己去读规则,比在报错里塞一段解释更可靠,也不会出现报错和规则各说一套。
+
+**通过的时候也打印一行,说清检查了多少个。** 源码里就一句:
+
+```ts
+console.log(`verify-agent-note-format: ${notes.length} Agent Note(s) checked, all conform to …`)
+```
+
+「检查了 696 篇,全部通过」和「通过」是两句不同的话。后者在 glob 写错、一个文件都没匹配上的时候照样会打印,而你会以为它在保护你。
+
+**它知道自己的假阳性在哪。** 这个门禁要检查 `Status:` 这类 token,而制度文档里恰好有一堆示例代码块也含这些 token,所以它先把围栏代码块过滤掉:
+
+> Format tokens inside fenced examples are not document structure.
+
+新门禁最容易死在假阳性上:连报几次错都是它自己看错了,大家就开始 `--no-verify`,然后这道检查再也没红过。
+
+### 挂在哪
+
+dsh 用 [lefthook](https://github.com/evilmartians/lefthook) 配 git 钩子,整个 `lefthook.yml` 几十行,两个决定值得抄。
+
+**pre-commit 的每个 job 都带 glob,只有相关文件进了暂存区才跑。** 改了 `.ts` 才跑 lint,碰了归档记录才跑归档检查。这是本地钩子能保持秒级的唯一办法——不是把检查写快,是不跑无关的。
+
+**pre-push 只有一条:`pnpm run typecheck`。**
+
+对,就一条。前面说「pre-push 刻意不跑全套」,落到配置里就是这么彻底:自动跑的只有增量类型检查,其余靠 [dsh-pre-push-checks](../.agents/skills/dsh-pre-push-checks/SKILL.md) 按改动面挑。判断力交给 skill,钩子只留那条不管改什么都值得跑的。
+
+还有一处小设计:生成物类的检查,dsh 的做法是**能修就别拒**。
+
+> Regenerate rather than reject: a dependency edit that forgot the notices would otherwise fail the test lane long after the commit.
+
+改了依赖但忘了重新生成第三方声明文件,钩子不报错,直接重新生成再 `git add`。配置里紧接着写了这招管不到的情况——删掉一个 manifest 时 glob 匹配不到任何文件,那种情况落到测试阶段去兜。一道门禁写清自己漏了什么,比假装全都覆盖了有用得多。
+
 ## 搬到自己项目
 
 1. **先挂类型检查到 pre-push。** 收益最大、成本最低。
@@ -99,6 +145,10 @@ dsh 要求 `packages/*/src` **逐文件 100%** 覆盖率,但配套的态度写�
 **不要让本地门禁慢到被绕过,要把慢的检查往后放。** 一旦有人开始用 `--no-verify`,这套东西就废了。
 
 **不要加完门禁就当它生效了,要故意制造一次违规确认它会红。** 理由见上面那个坑。
+
+**不要撞见第一个错就退出,要一次把全部违规报完。** AI 是照着报错改的,一次给一条,它就得跑五轮。
+
+**不要只在失败时输出,要在通过时打印检查了多少个。** 「通过」这两个字在 glob 写错、零个文件被匹配的时候一样会出现。
 
 ---
 

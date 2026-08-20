@@ -18,7 +18,7 @@ description: Use when reviewing a pull request in the deepseek-harness repo — 
   code alone can't show
 ```
 
-写得含糊,AI 就不知道什么时候该加载它,skill 等于不存在。
+写得含糊,AI 就不知道什么时候该加载它,skill 等于不存在。这一行怎么写,后面单独说。
 
 ### 值钱的不是步骤
 
@@ -115,6 +115,41 @@ flowchart LR
 
 该补的也要补。
 
+## description 决定它存不存在
+
+前面提过一句:description 写含糊,AI 判断不出何时该加载,这个 skill 就是死文件。这行值得展开,因为移植的时候它最容易被糊弄过去——正文抄得很全,description 随手写一句「代码审查规范」,然后从此没被加载过。
+
+dsh 的十一个 description 有统一的写法:**不描述这个 skill 是什么,只描述什么时候该用它。** 全部以 `Use when` 开头,后面把触发场景尽量摊开。
+
+摊开到什么程度?[dsh-trim-cot-leakage](../.agents/skills/dsh-trim-cot-leakage/SKILL.md) 把要抓的症状短语直接列进了 description:
+
+> dead design-session citations such as (decision N), audit item codes, or §N of uncommitted drafts; change narration such as "used to", "no longer", "this cut"; stack or review vantage …
+
+AI 读到一段带 `used to` 的注释,不需要先理解「什么是思维链泄漏」这个抽象概念,字面匹配上就知道该加载什么。
+
+[dsh-doc-standards](../.agents/skills/dsh-doc-standards/SKILL.md) 更直接,把用户可能说的原话都抄进去了:
+
+> … or requests like "improve the docs", "audit the docs", "where should this be documented", or "this doc is too long".
+
+连「这文档太长了」这种大白话都在里面。写 description 的时候,把你和 AI 平时怎么开口说这件事的原话放进去,比归纳成一个精确的术语有用得多。
+
+还有一类是反过来的:**明确不许自动加载。** [dsh-translate-docs](../.agents/skills/dsh-translate-docs/SKILL.md) 的 frontmatter 是:
+
+```yaml
+disable-model-invocation: true
+user-invocable: true
+```
+
+翻译这活儿成本高,而且大多数时候不该由 AI 自己决定要不要做,所以它只在用户点名叫它的时候才生效——正文第一节的标题就叫 "Invocation boundary",第一句是「只有用户显式点名时才运行」。有些流程你希望它存在,但不希望它自己启动,记得留这个开关。
+
+### 写多长
+
+dsh 的十一个 skill 是 45 到 146 行,中位数 81。不是刻意压的,是因为规则原文都不在 skill 里:`SKILL.md` 只写判定、护栏、工作流,细则一律链到 `AGENTS.md`、`docs/` 或者具体某篇决策记录。十一个里有五个开头就专门有一节列「该读哪些文件」,标题是 `Sources of truth` 或 `Read the contracts`;其中两个把要求直接写进了标题——`Sources of truth (read, don't re-summarize)`,别在这儿再总结一遍。
+
+**这条约束是有原因的。** 规则在 skill 里被重述一遍,就出现了第二份真相,改规则的人不会想到还要来同步这里,于是 skill 里那份慢慢变成过期的规则,而 AI 读到的是过期那份。宁可让它多读一个文件。
+
+真的写不下了,做法是拆 `references/`。[dsh-trim-cot-leakage](../.agents/skills/dsh-trim-cot-leakage/SKILL.md) 的 `SKILL.md` 只有 45 行,大量正反例校准放在 `references/examples.md` 和 `references/recall-batteries.md`,需要时才读。判定放主文件,校准放副文件。
+
 ## 搬到自己项目
 
 别一上来写操作手册。先问一个问题:
@@ -153,7 +188,9 @@ description: Use when <什么场景该用我,写清触发条件>
 
 **不要只抄步骤、把护栏当啰嗦删掉,要把护栏一起带走。** 这是移植 skill 最常见的错误,而且删掉之后 skill 看起来更清爽了,问题要等到 AI 过度执行时才暴露。
 
-**不要把 description 写得含糊,要写清「什么场景该用我」。** AI 判断不出何时该加载,skill 就是死文件。
+**不要把 description 写成「这个 skill 是什么」,要写「什么时候该用我」,并把触发的原话列进去。** AI 判断不出何时该加载,skill 就是死文件。
+
+**不要在 skill 里重述规则原文,要链过去。** 重述出来的就是第二份真相,改规则的人想不到还要同步这里,最后 AI 读的是过期那份。
 
 **不要写成死板清单,要明确写「这是指南,不是清单」。** 遇到清单没覆盖的情况,机械执行比不执行更糟。
 
