@@ -2,9 +2,34 @@
 import { defineConfig } from 'astro/config'
 import starlight from '@astrojs/starlight'
 
+/**
+ * 让 Markdown 正文里的链接在新标签打开,同页锚点除外。
+ *
+ * 只作用于 Markdown 渲染出的内容;侧边栏、目录、面包屑由 Starlight 组件生成,
+ * 不经过这里,所以站内导航仍然原地跳转——否则读一篇教程会攒出一堆标签页。
+ */
+function openContentLinksInNewTab() {
+  return (tree) => {
+    const walk = (node) => {
+      if (node.type === 'element' && node.tagName === 'a') {
+        const href = node.properties?.href
+        if (typeof href === 'string' && !href.startsWith('#')) {
+          node.properties.target = '_blank'
+          node.properties.rel = 'noopener noreferrer'
+        }
+      }
+      for (const child of node.children ?? []) walk(child)
+    }
+    walk(tree)
+  }
+}
+
 export default defineConfig({
   site: 'https://zszz3.github.io',
   base: '/dsh-VibeCoding',
+  markdown: {
+    rehypePlugins: [openContentLinksInNewTab],
+  },
   integrations: [
     starlight({
       title: 'dsh-VibeCoding',
@@ -15,9 +40,8 @@ export default defineConfig({
       social: [
         { icon: 'github', label: 'GitHub', href: 'https://github.com/zszz3/dsh-VibeCoding' },
       ],
-      editLink: {
-        baseUrl: 'https://github.com/zszz3/dsh-VibeCoding/edit/main/',
-      },
+      // 不开「编辑此页」:站点内容是 scripts/project.mjs 投影出来的,那些路径不在
+      // 版本库里,链过去只会 404;真正该编辑的是仓库里的原文。
       tableOfContents: { minHeadingLevel: 2, maxHeadingLevel: 3 },
       sidebar: [
         { label: '教程', autogenerate: { directory: 'guide' } },
