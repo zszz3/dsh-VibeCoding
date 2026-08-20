@@ -44,7 +44,30 @@ MIT 允许再分发和改编,要求保留版权与许可声明,本仓库的 `LIC
 
 ## 本仓库自己写的
 
-四份:`README.md`(教学文章)、`ATTRIBUTION.md`(本文件),以及网站需要的 `index.html` 与 `_sidebar.md`。
+- `README.md` —— 教学入口
+- `guide/01` 到 `guide/07` —— 七篇教程
+- `ATTRIBUTION.md` —— 本文件
+- `site/` —— 文档网站(Astro Starlight),内容由 `site/scripts/project.mjs` 从仓库真实路径投影而来
+- `.github/workflows/pages.yml` —— 网站部署
+
+## 中文对照(本仓库新增的翻译)
+
+上游给 693 篇 Agent Note 和 18 篇 docs 都做了 `.zh.md` 中文对照,但**六份 `AGENTS.md` 与 11 个 skill 是英文独有的**(它们是 agent 指令,不在上游的双语范围内)。
+
+本仓库为这 17 份补了中文对照,文件名沿用上游的 `.zh.md` 约定,与英文原文同目录:
+
+| 英文原文 | 中文对照 |
+|---|---|
+| `AGENTS.md`、`docs/AGENTS.md`、`packages/AGENTS.md`、`scripts/AGENTS.md`、`.github/AGENTS.md`、`.agents/notes/AGENTS.md` | 各自的 `AGENTS.zh.md` |
+| `.agents/skills/*/SKILL.md`(11 个) | 各自的 `SKILL.zh.md` |
+
+翻译遵循的规则:
+
+- **英文原文是权威版本**,每份译文开头都写明这一点;执行规则时以原文为准。
+- 术语按上游[术语表](https://github.com/deepseek-ai/deepseek-harness/blob/master/docs/i18n/terminology.md):`agent`、`skill`、`seam`、`Agent Note`、`worktree`、`waterfall` 等保留英文;`plugin`→插件、`session`→会话、`capability`→能力、`prompt`→提示词、`tool`→工具、`snapshot`→快照。
+- 结构逐节对应,代码/命令/路径/标识符原样保留,链接目标不变。
+- 保住模态词(must→必须、never→绝不),不把「必须」弱化成「应该」。
+- 译文不带 YAML frontmatter,以免被误当成可加载的 skill。
 
 ## 这些文件描述的是 dsh,不是本仓库
 
