@@ -46,20 +46,15 @@ export default defineConfig({
       sidebar: [
         { label: '教程', autogenerate: { directory: 'guide' } },
         {
+          // 侧边栏只列中文对照;英文原文仍然有独立页面,从每页顶部的链接进入
           label: '常驻规则(六层)',
           items: [
-            { label: '根:AGENTS.md', link: '/rules/root/' },
-            { label: '根:AGENTS.md · 中文', link: '/rules/root-zh/' },
-            { label: 'docs/ 文档规则', link: '/rules/docs/' },
-            { label: 'docs/ 文档规则 · 中文', link: '/rules/docs-zh/' },
-            { label: 'packages/ 包规则', link: '/rules/packages/' },
-            { label: 'packages/ 包规则 · 中文', link: '/rules/packages-zh/' },
-            { label: 'scripts/ 脚本规则', link: '/rules/scripts/' },
-            { label: 'scripts/ 脚本规则 · 中文', link: '/rules/scripts-zh/' },
-            { label: '.github/ CI 与 PR', link: '/rules/github/' },
-            { label: '.github/ CI 与 PR · 中文', link: '/rules/github-zh/' },
-            { label: '.agents/notes/ 记录规则', link: '/rules/notes/' },
-            { label: '.agents/notes/ 记录规则 · 中文', link: '/rules/notes-zh/' },
+            { label: '根:AGENTS.md', link: '/rules/root-zh/' },
+            { label: 'docs/ 文档规则', link: '/rules/docs-zh/' },
+            { label: 'packages/ 包规则', link: '/rules/packages-zh/' },
+            { label: 'scripts/ 脚本规则', link: '/rules/scripts-zh/' },
+            { label: '.github/ CI 与 PR', link: '/rules/github-zh/' },
+            { label: '.agents/notes/ 记录规则', link: '/rules/notes-zh/' },
           ],
         },
         { label: 'Skills', autogenerate: { directory: 'skills', collapsed: true } },
