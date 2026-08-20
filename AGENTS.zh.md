@@ -2,10 +2,6 @@
 
 [English 原文](AGENTS.md) | 中文
 
-> 这是英文原文的中文对照,供阅读方便。**英文原文是权威版本**,执行规则时以原文为准。
->
-> 术语译法参照 dsh 自己的[术语表](https://github.com/deepseek-ai/deepseek-harness/blob/master/docs/i18n/terminology.md):`agent`、`skill`、`seam`、`waterfall`、`Agent Note`、`worktree` 等按约定保留英文;`plugin` 译作插件、`session` 译作会话、`capability` 译作能力、`prompt` 译作提示词、`tool` 译作工具、`snapshot` 译作快照。
-
 DeepSeek Harness 是一个建立在 vendored Cordis 之上的插件化 agent harness(智能体框架):**一切皆插件**。改 `packages/` 之前先读 [docs/architecture.md](https://github.com/deepseek-ai/deepseek-harness/blob/master/docs/architecture.md);文档工作遵循 [docs/AGENTS.md](docs/AGENTS.zh.md)。
 
 ## 发布前的立场:地基优先于波及面

@@ -2,8 +2,6 @@
 
 [English 原文](SKILL.md) | 中文
 
-> 这是英文原文的中文对照,供阅读方便。**英文原文是权威版本**,执行规则时以原文为准。
-
 在发布、更新、移动或删除 DeepSeek Harness 文档站点页面时;编辑 website/docs.ts 映射或导航时;诊断 VitePress 站点上缺失的页面时;修复被投影(projection)的文档链接时;或在修改 website 内容之后运行 docs:dev、docs:check 与 doc-sync 工作流时,使用本 skill。
 
 保持仓库 Markdown 作为唯一可编辑的内容源。把站点当作一个经过测试的投影(projection)对待:[website/docs.ts](https://github.com/deepseek-ai/deepseek-harness/blob/master/website/docs.ts)选择公共页面、[scripts/project-doc-site.ts](https://github.com/deepseek-ai/deepseek-harness/blob/master/scripts/project-doc-site.ts)把它们重写进一次性的 `website/.generated/` 树、而 VitePress 构建该树。

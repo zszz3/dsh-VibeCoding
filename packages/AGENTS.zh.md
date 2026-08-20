@@ -2,8 +2,6 @@
 
 [English 原文](AGENTS.md) | 中文
 
-> 这是英文原文的中文对照,供阅读方便。**英文原文是权威版本**,执行规则时以原文为准。术语译法参照 dsh 自己的约定:`agent`、`skill`、`seam`、`Agent Note`、`worktree` 等保留英文。
-
 以下是针对包的规则,是对仓库全局[约定](../AGENTS.zh.md#约定)的补充。
 
 - **插件导出形式:** service 包默认导出它的 service 类;function 插件具名导出 `name` / `inject` / `Config` / `apply`,并且没有默认导出。两种形式混用会让 Loader 丢弃 function 插件的命名空间([事故复盘](https://github.com/deepseek-ai/deepseek-harness/blob/master/docs/postmortem/0001-acp-default-export-drops-inject.md))。

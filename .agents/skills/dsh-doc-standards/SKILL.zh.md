@@ -2,8 +2,6 @@
 
 [English 原文](SKILL.md) | 中文
 
-> 这是英文原文的中文对照,供阅读方便。**英文原文是权威版本**,执行规则时以原文为准。
-
 在 deepseek-harness 仓库里撰写、移动、审阅或审计文档时——不论是选择层级与详略、区分教程与参考资料、检查教程的循序渐进、削减文档冗余、回应 `verify-doc-budgets` 失败、还是诸如"改进文档"、"审计文档"、"这该记在哪里"、"这篇文档太长了"这类请求时,使用本 skill。
 
 文档规则住在 [docs/AGENTS.md](../../../docs/AGENTS.zh.md)。本工作流覆盖 Markdown、JSDoc 与代码注释中的归属、语料审计、预算与验证。它是指导,而非脚本;把 [dsh-prose-standard](../dsh-prose-standard/SKILL.zh.md) 用于必需的覆盖与编辑判断,并且绝不把长度本身当成缺陷。

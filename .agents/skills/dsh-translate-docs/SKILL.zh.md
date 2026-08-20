@@ -2,8 +2,6 @@
 
 [English 原文](SKILL.md) | 中文
 
-> 这是英文原文的中文对照,供阅读方便。**英文原文是权威版本**,执行规则时以原文为准。
-
 本 skill 在你通过名称显式调用 `dsh-translate-docs` 时触发,用于手动执行扩展的 DeepSeek Harness 双语文档工作流,包括生成的简报、委托式散文翻译、整文档翻译,以及限定范围的 pairing(配对)验证。普通文档翻译遵循 [docs/AGENTS.md](../../../docs/AGENTS.zh.md) 中的一次性单遍规则,不要选择或加载本 skill。
 
 ## Invocation boundary(调用边界)

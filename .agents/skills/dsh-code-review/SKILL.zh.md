@@ -2,8 +2,6 @@
 
 [English 原文](SKILL.md) | 中文
 
-> 这是英文原文的中文对照,供阅读方便。**英文原文是权威版本**,执行规则时以原文为准。
-
 该 skill 的 frontmatter(name:`dsh-code-review`;description:在 deepseek-harness 仓库审查 PR 时使用——向审查者阐明本代码库的规范(AGENTS.md 约定、防御模式、ADR、质量门禁)以及仅靠代码看不出的审查专用检查)定义了它的触发场景:当审查 deepseek-harness 仓库里的 PR 时使用。
 
 **本 skill 是指导,不是完整清单。** 在阅读 diff 与足以理解设计的周边代码之前,先验证并获取 PR 的实时 base 与精确 head,然后运行 `pnpm --silent run change-scope --base <verified-base-ref> --head <verified-head-ref>`。该报告会识别路径与脏层,但不能替代语义审查。在 retarget(重定位)或 merge(合并)之后,重新建立 base 并重跑它。把正确性、生命周期、安全性与被破坏的必需行为放在样式之前;一条有据的 blocker 胜过一堆 nit。

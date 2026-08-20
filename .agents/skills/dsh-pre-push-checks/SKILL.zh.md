@@ -2,8 +2,6 @@
 
 [English 原文](SKILL.md) | 中文
 
-> 这是英文原文的中文对照,供阅读方便。**英文原文是权威版本**,执行规则时以原文为准。
-
 在推送(包括 force push)、标记 ready for review、或宣称某 deepseek-harness 分支的检查已通过之前,以及在 `gh stack sync` 发布了重写后的各层分支之后立即,使用本 skill,用于为正在 outgoing 的改动或刚发布的改动选出覆盖面最小、能起到证据作用的本地检查集,而不是无脑跑整个仓库。
 
 本 skill 的本地证据只跑一次。唯一的顺序例外是 `gh stack sync`,它可能在重写后的各层被验证之前就先发布一次级联重基(rebase);此时要在发布后立即验证各层,且在所有证据通过之前绝不合并。Git hooks 故意收得很窄:pre-commit 修复 staged 的 lint、检查 staged 的空白、并守护 vendored 源文件的元数据;pre-push 只跑增量仓库级 typecheck。穷尽式覆盖率与平台矩阵归 CI 所有。

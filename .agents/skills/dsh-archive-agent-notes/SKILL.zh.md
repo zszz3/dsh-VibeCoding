@@ -2,8 +2,6 @@
 
 [English 原文](SKILL.md) | 中文
 
-> 这是英文原文的中文对照,供阅读方便。**英文原文是权威版本**,执行规则时以原文为准。
-
 本 skill 在 deepseek-harness 中新增、审计、修剪、归档、恢复或审阅 Agent Note 时触发:检查每条新 note 是否存在已被取代的现行记录,按未来决策价值对已实施 note 分类,删除已不再能防止某类诱人谬误(tempting fallacy)的已否决 note,并应用冻结的 archived/{kind} 三元组与清单(manifest)规则。
 
 ## 阅读契约

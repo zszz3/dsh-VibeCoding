@@ -2,8 +2,6 @@
 
 [English 原文](AGENTS.md) | 中文
 
-> 这是英文原文的中文对照,供阅读方便。**英文原文是权威版本**,执行规则时以原文为准。术语译法参照 dsh 自己的约定:`agent`、`skill`、`seam`、`Agent Note` 等保留英文。
-
 本文件定义文档结构、Markdown 分层、写作规则以及 `verify-doc-budgets` 的字数上限。放置位置与校验用 [dsh-doc-standards](../.agents/skills/dsh-doc-standards/SKILL.zh.md),必需覆盖与编辑判断用 [dsh-prose-standard](../.agents/skills/dsh-prose-standard/SKILL.zh.md);理由归 [doc-tiers 这篇 Agent Note](../.agents/notes/implemented/process/2026-07-04-doc-tiers-and-budgets.md) 所有。
 
 ## 文档结构

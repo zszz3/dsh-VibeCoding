@@ -65,12 +65,13 @@ MIT 允许再分发和改编,要求保留版权与许可声明,本仓库的 `LIC
 
 翻译遵循的规则:
 
-- **英文原文是权威版本**,每份译文开头都写明这一点;执行规则时以原文为准。
+- **英文原文是权威版本**,执行规则时以原文为准。这一点只在这里说明,不在每篇译文开头重复。
 - 术语按上游[术语表](https://github.com/deepseek-ai/deepseek-harness/blob/master/docs/i18n/terminology.md):`agent`、`skill`、`seam`、`Agent Note`、`worktree`、`waterfall` 等保留英文;`plugin`→插件、`session`→会话、`capability`→能力、`prompt`→提示词、`tool`→工具、`snapshot`→快照。
 - 结构逐节对应,代码/命令/路径/标识符原样保留。
 - 链接指向对照版(如果目标有对照版),这样中文读者点进去不会突然跳回英文;每页顶部都能切回原文。
 - 保住模态词(must→必须、never→绝不),不把「必须」弱化成「应该」。
-- 译文不带 YAML frontmatter,以免被误当成可加载的 skill;原文 frontmatter 里的 `description` 在正文第一段交代。
+- 译文不带 YAML frontmatter,以免被误当成可加载的 skill;原文 frontmatter 里的 `description` 在正文开头交代。
+- 译文开头只留语言切换行。个别文件多一句提示,是因为那份文件本身有特殊处理(比如 `dsh-trim-cot-leakage/references/examples.zh.md` 里作为「病例标本」的英文句子一律不译)。
 
 ## 这些文件描述的是 dsh,不是本仓库
 
