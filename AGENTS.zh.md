@@ -12,19 +12,76 @@ DeepSeek Harness 是一个建立在 vendored Cordis 之上的插件化 agent har
 
 ## 仓库布局
 
-英文原文的目录树按原样阅读(见 [AGENTS.md](AGENTS.md) 的 Repository layout 一节),要点是:
+```
+vendor/      vendored 的 Cordis 源码 —— 清单与同步流程见 vendor/README.md
+packages/    @deepseek-ai/dsh-<pkg> 工作区,位于 packages/<group>/<pkg>/
+  core/        产品 API 主干:session、system-prompt、tools、agent、agent-loop
+  api/         远端 BFF 组装与 Typert RPC 网关
+  typert/      类型图生成器、加载器与运行时注册表
+  llm/         LLM 能力:Service Definition/Consumer + DeepSeek provider
+  e2b/         E2B POC:sandbox 加 FS/子进程适配器
+  shell/        bash 能力:Service Definition + local/pwsh provider + shell Consumer
+  subprocess/  子进程能力 + 本地进程树 provider
+  terminal/         持久会话
+  fs/          文件系统能力 + 策略
+  lsp/         language-server 能力
+  skill/       skill provider 注册表 + 本地实现 + 目录/加载工具
+  web/         web 能力:Service Definition + 搜索/抓取 provider + 工具 Consumer
+  compaction/     压缩能力 + 基础 provider
+  context/     请求上下文插件
+  subagent/    subagent 能力:Service Definition + provider + 委派 Consumer
+  bundle/      可安装的 dsh --profile 补丁层 bundle
+  workflow/    workflow 能力 + worker-thread provider + 工具 Consumer
+  todo/        todo_write 工具
+  plan/        以日志化状态实现的 plan 模式
+  preset/      按 preset cordis.yml 做的按会话 agent 组装
+  guard/       循环卫生 + 工具超时插件
+  self-modification/  agent 检视并挂载自己的插件
+  hooks/       Claude Code/Codex 钩子桥接 + 线协议库
+  session/     持久的会话数据:持久化、投影、标题、遥测
+  identity/    匿名身份
+  settings/    用户设置能力 + 文件 provider
+  credentials/ 凭证引用能力 + env/.env provider
+  acp/         仅供自动化的 Agent Client Protocol 服务端
+  interaction/ 审批/交互能力、权限、命令、ask-user
+  boot/        共享的 app-bin 粘合层
+  sdk/         JSON-RPC 协议、服务端与 TypeScript 客户端
+  examples/    示例 bundle(agent-spine 加 CLI/ACP/JSON-RPC 可执行入口)
+  support/     开发/测试基础设施
+  util/        零依赖工具函数
+python/      Python SDK 与打包的运行时(见 python/README.md)
+native/      @deepseek-ai/node-addon-landlock-run 的权威源码(见 native/README.md)
+examples/    覆盖 packages/examples bundle 的可运行 cordis.yml 叶子(见 examples/AGENTS.md)
+.agents/     agent 工作流与 Agent Notes(notes/)
+docs/        架构、生成的目录、事故复盘、cookbook(见 docs/AGENTS.md)
+scripts/     仓库门禁与生成器
+website/     选定双语 docs/ 来源的 VitePress 投影
+```
 
-- `vendor/` —— 钉住版本的 Cordis 源码副本
-- `packages/` —— `@deepseek-ai/dsh-<pkg>` 工作区,按 `packages/<group>/<pkg>/` 组织,其中 `core/` 是产品 API 主干(会话、系统提示词、工具、agent、agent loop)
-- `python/`、`native/`、`examples/` —— Python SDK 与打包运行时、原生 landlock 启动器、可运行的 cordis.yml 叶子配置
-- `.agents/` —— agent 工作流与 Agent Notes(`notes/`)
-- `docs/` —— 架构、生成的目录、事故复盘、cookbook
-- `scripts/` —— 仓库门禁与生成器
-- `website/` —— 选定双语文档的 VitePress 投影
+包的分组见 [packages/README.md](https://github.com/deepseek-ai/deepseek-harness/blob/master/packages/README.md)。
 
 ## 命令
 
-命令清单按原样阅读(见原文 Commands 一节)。常用的有 `pnpm run test`(vitest 单元测试)、`pnpm run test:coverage`(CI 的覆盖率门禁,`packages/*/*/src` 逐文件 100%)、`pnpm run test:e2e`(真实 API 测试,没有 `DEEPSEEK_API_KEY` 时自动跳过)、`pnpm run test:snapshot`(无 key 的重放与预期输出比对)、`pnpm run typecheck`、`pnpm run lint`、`pnpm run build`、`pnpm run hygiene`、`pnpm run doc-sync`(全部文档门禁)。
+```sh
+pnpm install            # pnpm 工作区,node ^22.19 || >=24
+pnpm run clean           # 清掉构建产物,以及已删包留下的可安全移除的残留
+pnpm run test           # vitest 单元测试
+pnpm run test:coverage  # CI 的覆盖率门禁:packages/*/*/src 逐文件 100%
+pnpm run test:e2e       # 真实 API 测试;没有 DEEPSEEK_API_KEY 时自行跳过
+pnpm run test:snapshot  # 无 key 的 ACP/headless 重放与预期输出比对;过滤用 -t <name>
+pnpm run test:snapshot:record  # 重新录制预期输出(需要 key)
+pnpm run typecheck
+pnpm run lint
+pnpm run duplication    # 跨文件的 TypeScript 克隆检测
+pnpm run build          # tsc 产出 lib/types,tsdown 打包运行时
+pnpm run hygiene        # knip + publint + 工作区约束 + NodeNext 消费者检查
+pnpm run check:windows-wine  # 只在诊断已知的 Windows 失败时用(需要 wine);这个信号归 CI 所有
+pnpm run doc-sync       # 全部文档门禁;叶子清单见 scripts/run-gates.ts
+pnpm run website:build  # VitePress 构建(同时充当死链检查)
+pnpm dsh --profile headless "task"  # 从源码跑一个任务(需要 DEEPSEEK_API_KEY)
+pnpm run demo:cordis    # agent 修改自己的运行时(需要 key)
+pnpm run demo:acp       # ACP 自动化服务端(需要 DEEPSEEK_API_KEY)
+```
 
 ### 宿主 sandbox 导致的失败
 
