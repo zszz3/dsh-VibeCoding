@@ -55,17 +55,65 @@ description: Use when reviewing a pull request in the deepseek-harness repo — 
 > 一个站在 HEAD、拿不到任何会话记录、PR 讨论、未提交草稿的读者,能解析每一个引用、验证每一个论断吗?
 > 不能,就把幸存的事实用仓库视角重述,其余删掉。能,它就不是泄漏,不管听起来多像历史。
 
-注意后半句:**它明确说「能解析就留,不管听起来多像历史」**。这是在防一种过度执行——看到「旧连接先 drain,新连接才接收」这种话,以为是变更叙述就删掉,其实那是运行时行为的描述。
+这句话的力气在于它把一个很虚的问题——「这句话该不该留」——换成了一个能实际执行的检验:**换一个人来读,他会不会卡住。**
+
+那个人是:今天 `git clone` 了仓库、`checkout` 最新提交,手上只有这些文件。他没有你和 AI 的对话记录、没有 PR 评论区、没有你本地那份没提交的草稿。关键点是,**写这句话的时候这些东西对你都是唾手可得的**,所以你意识不到它们不在仓库里。
+
+判定拆成两个动作。
+
+**解析每一个引用** —— 提到的每个东西,他找得到吗?
+
+`(decision 7)` 搜遍仓库什么也没有,无法解析。`#1470` 是 GitHub issue,任何时候都能打开,可以。`RFC 9110 §10.1.5` 是外部标准,天生在仓库外解析,可以。界线不是「有没有引用外部东西」,而是**这个引用在任何时候都能不能被解析**。
+
+**验证每一个论断** —— 下的每个判断,他能自己确认真假吗?
+
+「这样写是安全的,因为评审时确认过」——他得去翻那次评审,无法验证。「持有锁期间不会 await,所以不会重入」——对着代码就能看,可验证。
+
+后半句「**能,它就不是泄漏,不管听起来多像历史**」是专门加的护栏。看到「旧连接先 drain,新连接才接收」这种话,容易以为是变更叙述就删掉,其实它描述的是关闭时的运行时行为,站在 HEAD 完全能验证。
+
+### 判定不通过 ≠ 删掉
+
+原话是「把**幸存的**事实用仓库视角重述」——「幸存」是个精确的词。一段话里常常一部分是事实、一部分是叙述,不能一起处理。下面这三条是同一个病的三种修法,一起看最清楚:
+
+**引用有主 → 换成主人的名字和路径**
+
+```
+❌ Slash input resolves against the visible catalog (decision 21).
+✅ …the plain-text-reference decision, owned by [the web input-machine note](…/2026-07-25-web-input-machine-and-slash-pipeline.md).
+```
+
+**引用没主,但带着事实 → 引用删掉,事实救出来**
+
+```
+❌ The registry rejects duplicate names (decision 7: names are flat, no namespacing).
+✅ The registry rejects duplicate names; names are flat, with no namespacing.
+```
+
+仓库里没有任何东西叫 decision 7,但括号里「名字是平的、没有命名空间」是真事实。连它一起删,信息就丢了。
+
+**整段一条事实都不带 → 直接删**
+
+```
+❌ Rendering is pure: same snapshot, same string (audit R3).
+✅ Rendering is pure: same snapshot, same string.
+```
 
 ### 八类泄漏
 
-死掉的设计会话引用(`(decision 7)`、阶段代号 `T4`)、栈和 PR 视角(「后面那个 PR」)、变更叙述和版本戳(`used to`、`this cut`)、评审编排(「评审时被否」)、面向 reviewer 的自辩(「这样写是安全的,因为…」)、复述和推导过程(控制流叙述)、对冲与计划残留(「暂时够用」)、写作语言串味。
+死掉的引用、栈和 PR 视角、变更叙述和版本戳、评审编排、面向评审者的自辩、复述和推导、对冲与计划残留、写作语言串味。八类各有各的修法。
 
-每类给了各自的修法,不是一律删。比如第五类那条:
+其中有一招值得单独记住 —— **反事实现在时**:
 
-> A comment arguing its own correctness addresses a reviewer, not a maintainer. State the invariant that makes the code safe, or delete the comment if the code shows it.
+```
+❌ This used to double-encode multibyte labels.
+✅ Without the byte-length guard, multibyte labels double-encode.
+```
 
-一段为自己正确性辩护的注释,是在对审查者说话而不是对维护者说话。改法是**陈述那条让代码安全的不变量**——如果代码本身已经说明了,才删。
+「以前会重复编码」改成「没有那个字节长度守卫就会重复编码」。同一个事实,换成现在时之后反而更有用了:它告诉下一个人**那个守卫为什么不能删**。原来那句只是把人送去翻 git 历史。
+
+还有一类容易搞错方向 —— 评审编排**不是删掉,是搬家**。「评审时否掉了给 spec 加缓存」这句话本身有价值,它的家是决策记录的 Alternatives 一节;搬过去的时候把「评审者是谁、第几轮否的」去掉,只留技术理由。
+
+八类各自的 before/after、以及在自己仓库里搜它们的 grep 探针,都在[附录](05-skills-appendix.md)里。
 
 ### 护栏:什么不算泄漏
 
@@ -79,23 +127,40 @@ flowchart LR
   G["护栏,一律保留:<br/>issue 号 #1470 · 豁免理由 oxlint-disable<br/>实测数据 512 层 ≈ 0.15s · 运行时新旧状态<br/>外部标准 RFC 9110 §10.1.5 · 项目口吻「我们」"]
 ```
 
-九条保留规则里,有两条特别能说明问题:
+九条保留规则里,最能说明问题的是这一对 —— 同一次无辅助的清理,一个方向删多了,另一个方向留多了。
 
-**抑制警告的理由。** `oxlint-disable … -- 原因` 这种注释看着就像「面向审查者的自辩」,但它是必需的:
+**issue 引用在任何位置都保留,却被删了。**
+
+```
+✅ Keep: The cap applies to the complete rendered value, wrappers included
+         (issue #1470 owns the follow-up).
+```
+
+删它的理由是「issue 引用该放在决策记录里」。方向反了:issue 在 HEAD 从任何位置都能解析,而「#N 负责后续」正是 README 里安放待做事项的法定写法。
+
+**形式像「点名归属文档」,但那份文档不存在,却被留了。**
+
+```
+❌ Delete: Badge renderer over the widget seam (see the widget-rendering RFC).
+```
+
+留它的理由是「它点名了归属文档」。也错了:没有任何已提交的文件叫 "the widget-rendering RFC"。**判定是可解析性,不是形式。**
+
+另外两条容易删错的:
+
+**抑制警告的理由。** `oxlint-disable … -- 原因` 看着就像「面向审查者的自辩」,但它是必需的:
 
 > Suppression justifications … are required prose; fix a false reason, never delete it.
 
-理由写错了要改,但绝不能删——删了下一个人就不知道为什么这里关掉了检查。
+dsh 原来那句写的是「上面的循环守卫证明了帧存在」,可那儿根本没有循环。**理由是假的就把理由改对,绝不能连注释一起删** —— 删了下一个人就不知道这里为什么关掉了检查。
 
 **实测数据。** 「(实测:512 层嵌套 ≈ 0.15s)」这种括号注释看着像临时草稿,但:
 
 > the provenance word "measured" is load-bearing.
 
-「实测」这个词是承重的——它说明这个常量不是拍脑袋定的。删掉之后,下一个人会以为可以随便改。
+「实测」这个词是承重的 —— 它说明这个常量不是拍脑袋定的。删掉之后,下一个人会以为可以随便改。
 
 **好在哪。** 一个热心的 AI 接到「清理文档」这种任务,最容易犯的错就是删得太多:issue 号、豁免理由、实测数据一起清掉,结果文档变干净了、信息少了,而且没人发现。判定告诉它删什么,护栏告诉它哪些是承重的。**只有判定的规范是危险的规范。**
-
-完整的八类修法、九条保留规则、五步工作流,以及大量正反例校准:[SKILL.md](../.agents/skills/dsh-trim-cot-leakage/SKILL.zh.md)、[examples.md](../.agents/skills/dsh-trim-cot-leakage/references/examples.zh.md)、[recall-batteries.md](../.agents/skills/dsh-trim-cot-leakage/references/recall-batteries.zh.md)。
 
 ## 再看一个:dsh-prose-standard 的「完整命题」
 
